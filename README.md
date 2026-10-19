@@ -60,6 +60,20 @@ El despliegue es con GitHub Actions
 Usuarios de demo, creados por Terraform: `cliente.demo`, `plomero.demo` y
 `electricista.demo`, con contraseña `BarrioFix-Demo-2026!`.
 
+### Capturas del despliegue
+
+Secrets del lab cargados en el repo:
+
+![Secrets del repo](docs/img/secrets.png)
+
+Checks del Pull Request en verde, incluido el análisis de seguridad:
+
+![Checks del PR](docs/img/pr-checks.png)
+
+Resumen del run con las URLs del sitio, la API y el login:
+
+![Resumen del deploy](docs/img/deploy-summary.webp)
+
 ## Infraestructura como código
 
 Toda la infra se crea con Terraform.
