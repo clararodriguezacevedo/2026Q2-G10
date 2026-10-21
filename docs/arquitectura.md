@@ -1,5 +1,7 @@
 # Arquitectura de BarrioFix
 
+![Diagrama de la arquitectura](img/arquitectura.png)
+
 Todo corre sobre servicios administrados de AWS. Estos son los que usamos y para qué:
 
 - AWS Lambda: el backend. Hay una función por dominio de la API y dos más que se disparan por eventos, con un layer de código común y el layer público de Powertools.
