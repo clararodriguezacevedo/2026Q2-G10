@@ -24,7 +24,7 @@ jobs:
       - name: Run tfsec
         uses: aquasecurity/tfsec-sarif-action@v0.1.3
         with:
-          sarif_file: tfsec.sarif         
+          sarif_file: tfsec.sarif
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
@@ -35,6 +35,15 @@ jobs:
   tf-comments:
     name: Terraform Security PR commenter
     runs-on: ubuntu-latest
+    # El commenter crea un check run via la Checks API y necesita permisos de
+    # escritura sobre el PR, que GitHub NO otorga a PRs desde forks (token de
+    # solo lectura). Por eso en PRs de fork el check quedaba colgado en
+    # "in progress" para siempre. Lo corremos solo en PRs del mismo repo; en
+    # forks el scan de seguridad ya lo cubre el job tfsec-run (SARIF).
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: Clone repo
