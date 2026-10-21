@@ -14,6 +14,8 @@ Terraform y los workflows de GitHub Actions. Los datos están en DynamoDB y el l
 Cognito con su Hosted UI. Cómo se conectan las piezas está explicado en
 [docs/arquitectura.md](docs/arquitectura.md).
 
+![Diagrama de la arquitectura](docs/img/arquitectura.png)
+
 ## Organización del repo
 
 ```
