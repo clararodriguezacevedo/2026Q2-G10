@@ -93,6 +93,7 @@ def crear(datos: SolicitudIn):
         "id_solicitud": id_sol,
         "titulo": datos.titulo, "descripcion": datos.descripcion, "direccion": datos.direccion,
         "fecha_creacion": ahora,
+        "fecha_actualizacion": ahora,
         "id_categoria": datos.id_categoria, "id_urgencia": datos.id_urgencia, "id_zona": datos.id_zona,
         "estado": reglas.PENDIENTE,
         "id_cliente": sub, "cliente": cliente,

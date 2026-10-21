@@ -94,16 +94,23 @@ def cancelar(id_sol: str, datos: TransicionIn):
 # helpers
 
 def _aplicar(id_sol, estado_destino, actor, motivo, update, condition, values, profesional):
+    ahora = _ahora()
     seg = {
         "PK": f"SOL#{id_sol}", "SK": f"SEG#{ulid()}",
         "estado": estado_destino,
         "actor": actor,
-        "fecha_desde": _ahora(),
+        "fecha_desde": ahora,
     }
     if profesional:
         seg["profesional"] = profesional
     if motivo:
         seg["motivo"] = motivo
+
+    # Dejamos la fecha de ultima modificacion en la META junto con el cambio de
+    # estado (mismo instante que el paso de seguimiento). Todas las update
+    # arrancan con "SET ", asi que inyectamos ahi la asignacion.
+    update = update.replace("SET ", "SET fecha_actualizacion = :__fa, ", 1)
+    values = {**values, ":__fa": ahora}
 
     dynamo.transact([
         {"Update": {

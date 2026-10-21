@@ -45,6 +45,9 @@ def solicitud_out(item: dict) -> dict:
         "lat": float(item["lat"]) if "lat" in item else None,
         "lng": float(item["lng"]) if "lng" in item else None,
         "fecha_creacion": item["fecha_creacion"],
+        # Ultima modificacion: se stampea en cada cambio de estado. Para items
+        # viejos (sin el campo) caemos a la fecha de creacion.
+        "fecha_actualizacion": item.get("fecha_actualizacion") or item["fecha_creacion"],
         "cancelada_por_cliente": bool(item.get("cancelada_por_cliente", False)),
         "fecha_cancelacion_cliente": item.get("fecha_cancelacion_cliente"),
         "categoria": catalogos.por_id("CATEGORIA", int(item["id_categoria"])),
