@@ -1,6 +1,6 @@
 # BarrioFix
 
-Grupo 10, Cloud Computing (82.08), ITBA.
+Grupo 10, Cloud Computing (82.08), ITBA. 5 integrantes.
 
 BarrioFix es una plataforma para pedir reparaciones en el barrio: un cliente publica una
 solicitud y un profesional de esa categoría la toma, la resuelve y después recibe una
