@@ -22,6 +22,9 @@ def usuario_out(sub: str, item: dict) -> dict:
         "es_profesional": rol == "PROFESIONAL",
         "es_admin": False,
         "activo": True,
+        # Solo los profesionales tienen; ordenadas para que la respuesta sea estable
+        "categorias": sorted(int(c) for c in item.get("categorias", [])),
+        "zonas": sorted(int(z) for z in item.get("zonas", [])),
     }
 
 

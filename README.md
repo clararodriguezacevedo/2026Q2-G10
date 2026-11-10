@@ -28,9 +28,12 @@ docs/                 arquitectura y capturas
 ```
 
 Dentro de terraform/organization cada archivo agrupa una parte de la infra (network.tf,
-compute.tf, api.tf, auth.tf, database.tf, storage.tf, frontend.tf, secrets.tf), y aparte están
-variables, outputs, locals y data sources. En seed/ quedan los JSON con la mock data:
-categorías, zonas, urgencias y las solicitudes de demo.
+compute.tf, api.tf, auth.tf, database.tf, storage.tf, frontend.tf, secrets.tf, eventos.tf,
+analytics.tf, observabilidad.tf), y aparte están variables, outputs, locals y data sources. En
+seed/ quedan los JSON con la mock data: categorías, zonas, urgencias, las solicitudes de demo
+recientes (solicitudes.json, armadas a mano) y un histórico de las semanas anteriores
+(solicitudes_historicas.json, que genera back/scripts/generar_seed_historico.py). En sql/ están
+las consultas de negocio que se guardan en Athena.
 
 ## Cómo desplegar
 
@@ -92,10 +95,79 @@ terraform output
 
 El bootstrap se corre una sola vez por cuenta. Se usa parallelism=1 por el lab, si se crean
 varias Lambdas dentro de la VPC al mismo tiempo, la creación de las interfaces de red suele dar
-timeout. Para destruir hay que vaciar primero los buckets de frontend y media, porque el provider
+timeout. Para destruir hay que vaciar primero los buckets de frontend, media y analytics, porque el provider
 que usamos para S3 no los vacía solo. Media tiene versionado, así que además de los archivos hay
 que borrar las versiones viejas; .github/scripts/vaciar-bucket.sh hace las dos cosas. Después se
 corre terraform destroy -parallelism=1.
+
+## Eventos y analytics
+
+Cada cambio de una solicitud (se crea, se acepta, se inicia, se resuelve, se libera, se cancela
+o se califica) se convierte en un evento sin que ninguna Lambda lo publique a mano. La tabla
+tiene DynamoDB Streams y un EventBridge Pipe lleva cada cambio de la META a un topic SNS. De ahí
+sale el fan-out a los consumidores. Hoy hay uno, analytics: una cola SQS que la Lambda analytics
+consume en lotes de hasta 100 mensajes, escribiendo los eventos como JSON en un bucket de S3
+particionado por fecha. Athena consulta ese bucket con una tabla de Glue que calcula las
+particiones sola (partition projection), así que no hace falta un crawler.
+
+Para ver los resultados, en la consola de Athena se elige el workgroup barriofix-analytics y en
+Saved queries están las consultas de negocio: fill rate a 48 horas por zona, combinaciones de
+categoría y zona donde los trabajos no se toman, el funnel completo, profesionales que aceptan y
+sueltan trabajos, cancelaciones según el estado desde el que se cancela e integridad de la
+urgencia. Las consultas cruzan los eventos con tablas de categorías, zonas, urgencias y usuarios
+de demo, así muestran nombres y no ids.
+
+Athena tiene datos desde el primer deploy. Las 80 solicitudes de demo (20 recientes y 60 del
+histórico) se cargan en DynamoDB y, del mismo seed, Terraform arma sus eventos en S3: lo que se
+ve en la app y lo que devuelven las consultas sale de los mismos datos. El histórico está armado
+para que cada consulta muestre algo (zonas del sur desatendidas, un solo gasista, un profesional
+que suelta trabajos, urgencia inflada). Las fechas se calculan desde el momento del primer apply,
+que queda guardado en el state, así no se mueven en los apply siguientes.
+
+El otro consumidor son las notificaciones por mail. Ante cada cambio de estado, la Lambda
+notif-cliente decide a quién avisar (al cliente cuando aceptan, empiezan, resuelven o liberan su
+solicitud, y al profesional asignado cuando el cliente cancela), busca su email en el perfil y
+devuelve el mail armado. Esa Lambda está dentro de la VPC y SQS no tiene Gateway Endpoint, así
+que no encola: el destino on-success de la invocación lleva el resultado a la cola email. De ahí
+lo toma enviar-email, la única función que habla SMTP, que va fuera de la VPC y no toca datos. El
+event source mapping limita cuántos envíos corren en paralelo para no pasarse del rate limit del
+proveedor; lo que no llega a mandarse espera en la cola.
+
+El tercer consumidor es el matcher. Cuando una solicitud queda disponible (se crea o un
+profesional la libera), avisa por mail a los profesionales que podrían tomarla: los disponibles que
+ofrecen esa categoría y cubren esa zona. Al profesional que la acaba de liberar no le avisa. La
+suscripción al topic filtra por estado, así que el resto de los cambios ni siquiera invoca la
+Lambda. Como notif-cliente, está en la VPC y devuelve los mails (uno por profesional) para que el
+destino on-success los lleve a la cola email.
+
+Para encontrar a esos profesionales sin recorrer la tabla hay un cuarto GSI,
+profesionales_por_categoria. El perfil guarda las categorías como un conjunto, y DynamoDB no puede
+indexar un valor que está adentro de un conjunto, así que el registro escribe además un ítem chico
+por cada categoría del profesional (USER#sub / PROCAT#categoría) con la categoría como clave del
+índice, sus zonas y su email. El perfil y esos ítems se escriben en una sola transacción. El
+matcher hace una Query por categoría y filtra por zona y disponibilidad sobre ese conjunto chico,
+igual que /api/trabajos hace con los pendientes.
+
+Las zonas del profesional salen del mismo catálogo que las de las solicitudes, así el matching es
+por id. En el registro del front, los barrios de CABA se eligen tocando su polígono en el mapa y
+los partidos del AMBA con chips; sin key de Google Maps quedan todas como chips. Los polígonos son
+el GeoJSON de barrios del portal de datos abiertos de la Ciudad, simplificado. Descartamos dejar
+que el profesional dibuje un área libre: habría que matchear por coordenadas (geohash), que
+DynamoDB no resuelve solo. Ningún profesional de demo cubre Villa Lugano, Mataderos ni Villa
+Soldati, así que ahí el matcher no avisa a nadie, que es el mismo desierto de oferta que muestran
+las consultas de Athena.
+
+Para que los mails salgan de verdad hay que cargar como secrets del repo SMTP_HOST, SMTP_USER,
+SMTP_PASSWORD y SMTP_FROM (y SMTP_PORT si no es 587), por ejemplo con un inbox de prueba de
+Mailtrap. El deploy los copia a Secrets Manager después del apply, así la credencial nunca pasa
+por el código ni por el state. Sin esos secrets todo funciona igual, pero enviar-email simula los
+envíos y deja en el log qué mail habría mandado.
+
+Si el lab no deja que EventBridge Pipes use el LabRole (se ve con
+`aws iam get-role --role-name LabRole --query Role.AssumeRolePolicyDocument`, tiene que figurar
+pipes.amazonaws.com), se despliega con `-var use_eventbridge_pipe=false` y el puente pasa a ser la
+Lambda publicador, que hace lo mismo. Las DLQ de las colas tienen alarmas de CloudWatch que
+publican en el topic barriofix-alarmas; con `-var alarm_email=...` además llegan por mail.
 
 ## Terraform
 
@@ -106,7 +178,8 @@ proyecto pasa por él: arma el zip de la función con su propio hash, así un ca
 no redeploya las demás, crea el log group desde Terraform para que el destroy no deje grupos
 sueltos y, si se le pasan, agrega la VPC, los layers, las variables de entorno y la concurrencia
 reservada. Las seis Lambdas de la API salen de una sola instancia del módulo con for_each, y las
-tres funciones restantes (pre-signup, auth-callback y foto-subida) lo usan una vez cada una.
+funciones restantes (pre-signup, auth-callback, foto-subida, analytics, notif-cliente, matcher,
+enviar-email y, solo sin el Pipe, publicador) lo usan una vez cada una.
 
 También usamos el módulo externo [terraform-aws-modules/vpc](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws),
 que crea la VPC, las subredes privadas y las route tables. Encima de eso, en network.tf,
@@ -136,6 +209,8 @@ Las que más usamos:
 - cidrsubnet saca una subred por AZ a partir del CIDR de la VPC.
 - fileset y filemd5 recorren el build del front y suben solo los archivos que cambiaron.
 - lookup, junto con split, reverse y lower, elige el Content-Type según la extensión de cada archivo.
+- fileset, trimsuffix y templatefile cargan cada consulta de sql/ en Athena con el nombre de la base ya resuelto, y split con trimprefix sacan su descripción de la primera línea.
+- concat junta los dos JSON de solicitudes, y lookup sobre un mapa de transiciones traduce cada paso del seguimiento al evento que generaría la Lambda. floor agrupa esos eventos por día y formatdate arma la partición de cada uno.
 
 Además hay usos más chicos de try, upper, tostring, toset y, en las validaciones, de can,
 regex, cidrhost y length.
@@ -143,13 +218,22 @@ regex, cidrhost y length.
 ### Meta-argumentos
 
 Usamos los cuatro. for_each es el que más aparece: crea las Lambdas de la API, sus rutas e
-integraciones en API Gateway, los usuarios de demo, los ítems del seed y los archivos del front.
-count crea la resource policy de DynamoDB solo si restrict_dynamodb_to_vpc está en true.
-depends_on asegura que el log group exista antes que la función y que S3 tenga permiso para
-invocar a foto-subida antes de registrar la notificación. Y lifecycle aparece de dos formas:
+integraciones en API Gateway, los usuarios de demo y sus ítems de membresía, los ítems del seed,
+los archivos del front,
+una alarma por cada DLQ y por cada cola con consumidor, las tablas de dimensiones y las consultas
+guardadas de Athena. count crea la resource policy de
+DynamoDB solo si restrict_dynamodb_to_vpc está en true, elige entre el Pipe y la Lambda
+publicador según use_eventbridge_pipe y suscribe el mail de alarmas solo si se pasa uno.
+depends_on asegura que el log group exista antes que la función, que S3 tenga permiso para
+invocar a foto-subida antes de registrar la notificación, que SNS tenga permiso para invocar a
+notif-cliente y al matcher antes de suscribirlos, que la cola de analytics acepte mensajes del
+topic antes de suscribirla y que el Pipe arranque después de cargar el seed (si
+no, los ítems de demo entrarían dos veces a analytics). Las columnas de las tablas de Athena
+salen de un bloque dynamic sobre listas en locals. Y lifecycle aparece de dos formas:
 create_before_destroy en el layer común, para que las Lambdas no se queden sin layer cuando se
 reemplaza, e ignore_changes en los ítems del seed, para que un apply no pise lo que se cambió
-desde la app.
+desde la app, en el terraform_data que guarda el momento del primer apply y en el secreto SMTP,
+para que Terraform no pise la credencial que carga el pipeline.
 
 ### Locals y data sources
 

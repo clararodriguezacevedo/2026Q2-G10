@@ -15,7 +15,9 @@ class RegistroIn(BaseModel):
     telefono: Optional[str] = Field(default=None, max_length=30)
     rol: Literal["CLIENTE", "PROFESIONAL"] = "CLIENTE"
     descripcion_profesional: Optional[str] = None
-    categorias: List[int] = Field(default_factory=list)
+    categorias: List[int] = Field(default_factory=list, max_length=40)
+    # Zonas que cubre el profesional; sin zonas no recibe avisos de trabajos nuevos
+    zonas: List[int] = Field(default_factory=list, max_length=100)
 
 
 class SolicitudIn(BaseModel):

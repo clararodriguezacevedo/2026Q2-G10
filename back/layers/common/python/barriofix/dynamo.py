@@ -6,7 +6,7 @@ import json
 from typing import Any, Optional
 
 import boto3
-from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Attr, Key
 from boto3.dynamodb.types import TypeSerializer
 from botocore.exceptions import ClientError
 
@@ -48,6 +48,27 @@ def query_index(index: str, pk_name: str, pk_value: Any, *, limit: int = 50,
     resp = tabla.query(**params)
     siguiente = resp.get("LastEvaluatedKey")
     return resp.get("Items", []), (_encode_cursor(siguiente) if siguiente else None)
+
+
+def profesionales_para(id_categoria: int, id_zona: int) -> list[dict]:
+    """Membresias de profesionales disponibles de una categoria que cubren una zona.
+
+    Una Query al GSI profesionales_por_categoria (la categoria es la clave) y la
+    zona y la disponibilidad como filtro sobre ese conjunto chico, igual que
+    /api/trabajos hace con zona y urgencia sobre los pendientes.
+    """
+    params: dict[str, Any] = {
+        "IndexName": "profesionales_por_categoria",
+        "KeyConditionExpression": Key("pro_categoria").eq(id_categoria),
+        "FilterExpression": Attr("disponible").eq(True) & Attr("zonas").contains(id_zona),
+    }
+    items: list[dict] = []
+    while True:
+        resp = tabla.query(**params)
+        items += resp.get("Items", [])
+        if "LastEvaluatedKey" not in resp:
+            return items
+        params["ExclusiveStartKey"] = resp["LastEvaluatedKey"]
 
 
 def put(item: dict, condition: Optional[str] = None) -> None:

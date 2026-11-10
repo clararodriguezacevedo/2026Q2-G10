@@ -10,8 +10,17 @@ locals {
   }
 
   # Nombres de los buckets, unicos globalmente
-  bucket_front = format("%s-frontend-%s", var.project, local.suffix)
-  bucket_media = format("%s-media-%s", var.project, local.suffix)
+  bucket_front     = format("%s-frontend-%s", var.project, local.suffix)
+  bucket_media     = format("%s-media-%s", var.project, local.suffix)
+  bucket_analytics = format("%s-analytics-%s", var.project, local.suffix)
+
+  # Del Stream solo interesa la META de las solicitudes al crearse o cambiar.
+  # Deja afuera los pasos SEG#, los perfiles, los catalogos y los borrados.
+  # Lo comparten el Pipe y, si se usa, el event source mapping del publicador
+  filtro_eventos = jsonencode({
+    eventName = ["INSERT", "MODIFY"]
+    dynamodb  = { Keys = { SK = { S = ["META"] } } }
+  })
 
   # Catalogos de seed, un archivo JSON por tipo cargado como items
   # { "CATEGORIA#0001" = {...}, "ZONA#0001" = {...}, ... }
@@ -22,15 +31,81 @@ locals {
     }
   ]...)
 
-  # Momento base del seed de solicitudes. Se evalua una vez por apply y queda
-  # fijo en cada item por el ignore_changes, asi las fechas no cambian despues.
-  seed_now = timestamp()
+  # Momento base del seed: la medianoche (UTC) del primer apply, congelada en el
+  # state (ver seed_solicitudes.tf). Que sea medianoche hace que el dia de cada
+  # evento se pueda calcular sin conocer la hora del apply
+  seed_now = "${formatdate("YYYY-MM-DD", terraform_data.seed_ancla.output)}T00:00:00Z"
 
-  # Solicitudes de demo, recuperadas del seed que teniamos en RDS. Un objeto por
-  # solicitud con su historial de seguimiento; las fechas son relativas a la
-  # creacion (en horas) y cliente/profesional/actor referencian la clave de
-  # demo_users (el sub de Cognito se resuelve recien en database.tf).
-  solicitudes_seed = jsondecode(file("${path.module}/seed/solicitudes.json"))
+  # Solicitudes de demo. Un objeto por solicitud con su historial de seguimiento;
+  # las fechas son relativas a la creacion (en horas) y cliente/profesional/actor
+  # referencian la clave de demo_users (el sub de Cognito se resuelve recien en
+  # database.tf). solicitudes.json son las recientes, armadas a mano;
+  # solicitudes_historicas.json las de las semanas anteriores, generadas con
+  # back/scripts/generar_seed_historico.py para que analytics tenga que mostrar
+  solicitudes_seed = concat(
+    jsondecode(file("${path.module}/seed/solicitudes.json")),
+    jsondecode(file("${path.module}/seed/solicitudes_historicas.json")),
+  )
+
+  # Transiciones del flujo, las mismas que traduce barriofix/eventos.py
+  transiciones = {
+    "PENDIENTE>ASIGNADO"    = "aceptar"
+    "ASIGNADO>EN_PROGRESO"  = "iniciar"
+    "EN_PROGRESO>RESUELTO"  = "resolver"
+    "ASIGNADO>PENDIENTE"    = "liberar"
+    "EN_PROGRESO>PENDIENTE" = "liberar"
+  }
+
+  # Eventos de analytics del seed: el mismo historial que se carga en DynamoDB,
+  # traducido como lo haria la Lambda analytics. Van en horas relativas y con
+  # usernames; la fecha y el sub de Cognito se resuelven en analytics.tf
+  eventos_seed = merge(
+    # Un evento por paso del seguimiento; el primero es la creacion
+    merge([
+      for s in local.solicitudes_seed : {
+        for idx, seg in s.seguimiento :
+        "${s.id}#${format("%02d", idx + 1)}" => {
+          id_solicitud = s.id
+          tipo = (idx == 0 ? "creada" : seg.estado == "CANCELADO" ? "cancelar"
+          : lookup(local.transiciones, "${s.seguimiento[max(idx - 1, 0)].estado}>${seg.estado}", "cambio_estado"))
+          estado_anterior = idx == 0 ? null : s.seguimiento[max(idx - 1, 0)].estado
+          estado_nuevo    = seg.estado
+          cliente         = s.cliente
+          # Al liberar o cancelar el paso no trae profesional: es el que estaba
+          profesional  = seg.profesional != null ? seg.profesional : s.seguimiento[max(idx - 1, 0)].profesional
+          id_categoria = s.id_categoria
+          id_zona      = s.id_zona
+          id_urgencia  = s.id_urgencia
+          edad_horas   = s.creada_hace_horas
+          offset_horas = seg.offset_horas
+          puntuacion   = null
+        }
+      }
+    ]...),
+    # Y uno por cada calificacion
+    {
+      for s in local.solicitudes_seed : "${s.id}#cal" => {
+        id_solicitud    = s.id
+        tipo            = "calificada"
+        estado_anterior = "RESUELTO"
+        estado_nuevo    = "RESUELTO"
+        cliente         = s.cliente
+        profesional     = s.profesional
+        id_categoria    = s.id_categoria
+        id_zona         = s.id_zona
+        id_urgencia     = s.id_urgencia
+        edad_horas      = s.creada_hace_horas
+        offset_horas    = s.calificacion.offset_horas
+        puntuacion      = s.calificacion.puntuacion
+      } if s.calificacion != null
+    },
+  )
+
+  # Dia de cada evento relativo a seed_now (0 = hoy, -1 = ayer...) -> claves de
+  # eventos. Un objeto en S3 por dia, como los que escribe la Lambda
+  eventos_seed_por_dia = {
+    for k, e in local.eventos_seed : tostring(floor((e.offset_horas - e.edad_horas) / 24)) => k...
+  }
 
   # id de solicitud -> objeto, con la fecha de creacion ya calculada
   solicitudes_by_id = {
@@ -131,7 +206,9 @@ locals {
   ]...)
 
   # Mock data, usuarios de demo. username (clave) -> datos del perfil.
-  # Las categorias de los profesionales referencian los ids de seed/categoria.json.
+  # Las categorias de los profesionales referencian los ids de seed/categoria.json
+  # y las zonas los de seed/zona.json. Ningun profesional cubre el sur (Villa
+  # Lugano, Mataderos, Villa Soldati): es el desierto de oferta que muestra analytics.
   # descripcion queda "" en los clientes: solo la usan los profesionales (ver database.tf).
   demo_users = {
     # Clientes
@@ -142,6 +219,7 @@ locals {
       telefono    = "+54 11 5555-1001"
       rol         = "CLIENTE"
       categorias  = []
+      zonas       = []
       descripcion = ""
     }
     "sofia.garcia" = {
@@ -151,6 +229,7 @@ locals {
       telefono    = "+54 11 5555-1002"
       rol         = "CLIENTE"
       categorias  = []
+      zonas       = []
       descripcion = ""
     }
     "martin.lopez" = {
@@ -160,6 +239,7 @@ locals {
       telefono    = "+54 11 5555-1003"
       rol         = "CLIENTE"
       categorias  = []
+      zonas       = []
       descripcion = ""
     }
     "valentina.romero" = {
@@ -169,6 +249,7 @@ locals {
       telefono    = "+54 11 5555-1004"
       rol         = "CLIENTE"
       categorias  = []
+      zonas       = []
       descripcion = ""
     }
     "lucas.fernandez" = {
@@ -178,6 +259,7 @@ locals {
       telefono    = "+54 11 5555-1005"
       rol         = "CLIENTE"
       categorias  = []
+      zonas       = []
       descripcion = ""
     }
 
@@ -189,6 +271,7 @@ locals {
       telefono    = "+54 11 5555-2001"
       rol         = "PROFESIONAL"
       categorias  = [2, 17, 30]
+      zonas       = [21, 36, 2, 8, 28]
       descripcion = "Electricista matriculado. Instalaciones eléctricas, reparación de cortocircuitos, tableros, térmicas, disyuntores y luminarias."
     }
     "diego.plomero" = {
@@ -198,6 +281,7 @@ locals {
       telefono    = "+54 11 5555-2002"
       rol         = "PROFESIONAL"
       categorias  = [1, 25]
+      zonas       = [21, 5, 20, 11, 36]
       descripcion = "Plomero con experiencia en pérdidas de agua, grifería, cañerías, destapaciones y reparación de sanitarios."
     }
     "mariano.gasista" = {
@@ -207,6 +291,7 @@ locals {
       telefono    = "+54 11 5555-2003"
       rol         = "PROFESIONAL"
       categorias  = [3, 4]
+      zonas       = [8, 2, 7, 13, 21]
       descripcion = "Gasista especializado en instalación, mantenimiento y reparación de calefones, termotanques y cocinas."
     }
     "pablo.pintor" = {
@@ -216,6 +301,7 @@ locals {
       telefono    = "+54 11 5555-2004"
       rol         = "PROFESIONAL"
       categorias  = [7, 8, 10, 25]
+      zonas       = [5, 20, 28, 30, 10]
       descripcion = "Pintor de interiores y exteriores. Preparación de paredes, pintura, enduido, impermeabilización y terminaciones."
     }
     "federico.tecnico" = {
@@ -225,7 +311,15 @@ locals {
       telefono    = "+54 11 5555-2005"
       rol         = "PROFESIONAL"
       categorias  = [4, 14, 15, 16]
+      zonas       = [36, 21, 8, 5, 28]
       descripcion = "Técnico especializado en aire acondicionado, refrigeración y mantenimiento general de equipos domiciliarios."
     }
   }
+
+  # "<usuario>#<categoria>" -> {usuario, categoria}, un item de membresia por par
+  demo_membresias = merge([
+    for u, d in local.demo_users : {
+      for c in d.categorias : "${u}#${c}" => { usuario = u, categoria = c }
+    } if d.rol == "PROFESIONAL"
+  ]...)
 }

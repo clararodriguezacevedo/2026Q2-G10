@@ -39,6 +39,10 @@ jobs:
           python-version: "3.12"
       - name: Compilar handlers y layer comun
         run: python -m py_compile back/layers/common/python/barriofix/*.py back/functions/*/app.py
+      - name: Tests de la logica pura (sin AWS)
+        env:
+          PYTHONPATH: back/layers/common/python
+        run: python -m unittest discover -s back/tests -v
 
   frontend:
     runs-on: ubuntu-latest

@@ -1,7 +1,8 @@
-# Tabla unica con tres GSIs sparse
-#   por_cliente     -> solicitudes de un cliente
-#   por_profesional -> solicitudes asignadas a un profesional (sparse)
-#   pendientes      -> trabajos disponibles por categoria (sparse)
+# Tabla unica con cuatro GSIs sparse
+#   por_cliente                 -> solicitudes de un cliente
+#   por_profesional             -> solicitudes asignadas a un profesional (sparse)
+#   pendientes                  -> trabajos disponibles por categoria (sparse)
+#   profesionales_por_categoria -> profesionales de una categoria, para el matcher (sparse)
 
 # Sin CMK propia ni point in time recovery, decisiones asumidas (ver docs/arquitectura.md)
 #tfsec:ignore:aws-dynamodb-table-customer-key
@@ -36,6 +37,10 @@ resource "aws_dynamodb_table" "this" {
   attribute {
     name = "id_solicitud"
     type = "S"
+  }
+  attribute {
+    name = "pro_categoria"
+    type = "N"
   }
 
   global_secondary_index {
@@ -80,10 +85,29 @@ resource "aws_dynamodb_table" "this" {
     }
   }
 
+  # Solo tienen pro_categoria los items de membresia (USER#<sub> / PROCAT#<cat>):
+  # un item por profesional y categoria, porque no se puede indexar un valor
+  # adentro del set de categorias del perfil. Sin clave de rango: el matcher
+  # trae todos los de la categoria y filtra por zona y disponibilidad
+  global_secondary_index {
+    name            = "profesionales_por_categoria"
+    projection_type = "ALL"
+
+    key_schema {
+      attribute_name = "pro_categoria"
+      key_type       = "HASH"
+    }
+  }
+
   # Cifrado en reposo con la llave gestionada por AWS (no CMK propia)
   server_side_encryption {
     enabled = true
   }
+
+  # Fuente del backbone de eventos (ver eventos.tf). Con la imagen vieja y la
+  # nueva se sabe que transicion hubo y quien estaba asignado antes de liberar
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES"
 
   # Desactivada a proposito para que terraform destroy pueda borrar la tabla
   deletion_protection_enabled = false
@@ -173,7 +197,34 @@ resource "aws_dynamodb_table_item" "perfil_demo" {
     { for k in(local.demo_users[each.key].rol == "PROFESIONAL" ? ["disponible"] : []) : k => { BOOL = true } },
     { for k in(local.demo_users[each.key].rol == "PROFESIONAL" ? ["descripcion"] : []) : k => { S = local.demo_users[each.key].descripcion } },
     { for k in(local.demo_users[each.key].rol == "PROFESIONAL" ? ["categorias"] : []) : k => { NS = [for c in local.demo_users[each.key].categorias : tostring(c)] } },
+    { for k in(local.demo_users[each.key].rol == "PROFESIONAL" ? ["zonas"] : []) : k => { NS = [for z in local.demo_users[each.key].zonas : tostring(z)] } },
   ))
+
+  lifecycle {
+    ignore_changes = [item]
+  }
+}
+
+# Membresias de los profesionales de demo: lo mismo que escribe el registro
+# (barriofix/membresias.py), un item por profesional y categoria para el GSI
+resource "aws_dynamodb_table_item" "membresia_demo" {
+  for_each = local.demo_membresias
+
+  table_name = aws_dynamodb_table.this.name
+  hash_key   = aws_dynamodb_table.this.hash_key
+  range_key  = aws_dynamodb_table.this.range_key
+
+  item = jsonencode({
+    PK            = { S = "USER#${aws_cognito_user.demo[each.value.usuario].sub}" }
+    SK            = { S = format("PROCAT#%04d", each.value.categoria) }
+    pro_categoria = { N = tostring(each.value.categoria) }
+    id_usuario    = { S = aws_cognito_user.demo[each.value.usuario].sub }
+    nombre        = { S = local.demo_users[each.value.usuario].nombre }
+    apellido      = { S = local.demo_users[each.value.usuario].apellido }
+    email         = { S = local.demo_users[each.value.usuario].email }
+    disponible    = { BOOL = true }
+    zonas         = { NS = [for z in local.demo_users[each.value.usuario].zonas : tostring(z)] }
+  })
 
   lifecycle {
     ignore_changes = [item]

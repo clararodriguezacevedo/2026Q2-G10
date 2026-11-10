@@ -116,6 +116,29 @@ variable "auth_callback_reserved_concurrency" {
   default     = 10
 }
 
+variable "use_eventbridge_pipe" {
+  description = "Puente Stream -> SNS con EventBridge Pipes. En false usa la Lambda publicador, por si el LabRole no confia en pipes.amazonaws.com"
+  type        = bool
+  default     = true
+}
+
+variable "email_max_concurrency" {
+  description = "Invocaciones de enviar-email en paralelo (tope contra el rate limit del proveedor SMTP)"
+  type        = number
+  default     = 2
+
+  validation {
+    condition     = var.email_max_concurrency >= 2 && var.email_max_concurrency <= 1000
+    error_message = "email_max_concurrency tiene que estar entre 2 y 1000 (limites de SQS para Lambda)."
+  }
+}
+
+variable "alarm_email" {
+  description = "Email que recibe las alarmas (hay que confirmar la suscripcion). Vacio = sin suscripcion"
+  type        = string
+  default     = ""
+}
+
 variable "google_maps_api_key" {
   # Key publica: el navegador la recibe igual en config.json, no es un secreto
   description = "API key de Google Maps para el mapa de ubicacion del front. Vacia = el front muestra solo la direccion"
