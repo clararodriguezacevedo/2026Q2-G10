@@ -15,8 +15,7 @@ locals {
   bucket_analytics = format("%s-analytics-%s", var.project, local.suffix)
 
   # Del Stream solo interesa la META de las solicitudes al crearse o cambiar.
-  # Deja afuera los pasos SEG#, los perfiles, los catalogos y los borrados.
-  # Lo comparten el Pipe y, si se usa, el event source mapping del publicador
+  # Deja afuera los pasos SEG#, los perfiles, los catalogos y los borrados
   filtro_eventos = jsonencode({
     eventName = ["INSERT", "MODIFY"]
     dynamodb  = { Keys = { SK = { S = ["META"] } } }

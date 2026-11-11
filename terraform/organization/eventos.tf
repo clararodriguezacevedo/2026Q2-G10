@@ -29,11 +29,17 @@ resource "aws_sqs_queue" "eventos_dlq" {
   tags                      = local.tags
 }
 
-# puente Stream -> SNS con EventBridge Pipes (sin Lambda intermedia)
+# puente Stream -> SNS con EventBridge Pipes (sin Lambda intermedia). Usa el LabRole,
+# que en el Learner Lab confia en pipes.amazonaws.com
+
+# Antes el Pipe tenia count (habia una Lambda de respaldo). Asi Terraform no lo
+# destruye y recrea al cambiarle la direccion en el state
+moved {
+  from = aws_pipes_pipe.eventos[0]
+  to   = aws_pipes_pipe.eventos
+}
 
 resource "aws_pipes_pipe" "eventos" {
-  count = var.use_eventbridge_pipe ? 1 : 0
-
   name     = "${var.project}-eventos"
   role_arn = data.aws_iam_role.lab.arn
   source   = aws_dynamodb_table.this.stream_arn
@@ -61,53 +67,5 @@ resource "aws_pipes_pipe" "eventos" {
 
   # El Stream arranca en LATEST: si el puente existe antes de cargar el seed, sus
   # INSERT entrarian como eventos nuevos y duplicarian los del historico en S3
-  depends_on = [aws_dynamodb_table_item.solicitud]
-}
-
-# puente alternativo con Lambda, solo si use_eventbridge_pipe = false
-
-# Fuera de la VPC: SNS no tiene Gateway Endpoint. No consulta la tabla, reenvia
-# el registro que le entrega el Stream
-module "publicador" {
-  source = "../modules/lambda_function"
-  count  = var.use_eventbridge_pipe ? 0 : 1
-
-  name        = "${var.project}-publicador"
-  source_dir  = "${path.module}/../../back/functions/publicador"
-  role_arn    = data.aws_iam_role.lab.arn
-  layers      = [var.powertools_layer_arn]
-  memory_size = 256
-
-  environment = {
-    TOPIC_ARN = aws_sns_topic.eventos.arn
-  }
-
-  tags = local.tags
-}
-
-resource "aws_lambda_event_source_mapping" "publicador" {
-  count = var.use_eventbridge_pipe ? 0 : 1
-
-  function_name                  = module.publicador[0].arn
-  event_source_arn               = aws_dynamodb_table.this.stream_arn
-  starting_position              = "LATEST"
-  batch_size                     = 10
-  maximum_retry_attempts         = 5
-  bisect_batch_on_function_error = true
-  function_response_types        = ["ReportBatchItemFailures"]
-
-  filter_criteria {
-    filter {
-      pattern = local.filtro_eventos
-    }
-  }
-
-  destination_config {
-    on_failure {
-      destination_arn = aws_sqs_queue.eventos_dlq.arn
-    }
-  }
-
-  # Igual que el Pipe: que el seed no pase por el puente
   depends_on = [aws_dynamodb_table_item.solicitud]
 }

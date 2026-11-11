@@ -116,12 +116,6 @@ variable "auth_callback_reserved_concurrency" {
   default     = 10
 }
 
-variable "use_eventbridge_pipe" {
-  description = "Puente Stream -> SNS con EventBridge Pipes. En false usa la Lambda publicador, por si el LabRole no confia en pipes.amazonaws.com"
-  type        = bool
-  default     = true
-}
-
 variable "email_max_concurrency" {
   description = "Invocaciones de enviar-email en paralelo (tope contra el rate limit del proveedor SMTP)"
   type        = number
