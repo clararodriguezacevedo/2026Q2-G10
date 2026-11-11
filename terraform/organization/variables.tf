@@ -127,6 +127,23 @@ variable "email_max_concurrency" {
   }
 }
 
+variable "servicios_seguridad" {
+  description = "Servicios de deteccion a nivel cuenta que se activan. Apagados por defecto: en el Learner Lab hay que verificar que esten permitidos antes de prenderlos"
+  type = object({
+    guardduty    = optional(bool, false)
+    inspector    = optional(bool, false)
+    config       = optional(bool, false)
+    security_hub = optional(bool, false)
+  })
+  default = {}
+
+  # Los controles de Security Hub se evaluan con lo que graba Config
+  validation {
+    condition     = !var.servicios_seguridad.security_hub || var.servicios_seguridad.config
+    error_message = "Security Hub necesita Config activado para evaluar sus controles."
+  }
+}
+
 variable "alarm_email" {
   description = "Email que recibe las alarmas (hay que confirmar la suscripcion). Vacio = sin suscripcion"
   type        = string

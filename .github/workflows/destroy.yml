@@ -58,7 +58,7 @@ jobs:
         # Incluye las versiones viejas: media tiene versionado y sin borrarlas
         # el destroy falla con "The bucket you tried to delete is not empty"
         run: |
-          for b in "barriofix-frontend-${ACCOUNT_ID}" "barriofix-media-${ACCOUNT_ID}" "barriofix-analytics-${ACCOUNT_ID}"; do
+          for b in "barriofix-frontend-${ACCOUNT_ID}" "barriofix-media-${ACCOUNT_ID}" "barriofix-analytics-${ACCOUNT_ID}" "barriofix-config-${ACCOUNT_ID}"; do
             bash .github/scripts/vaciar-bucket.sh "$b"
           done
 

@@ -13,6 +13,7 @@ locals {
   bucket_front     = format("%s-frontend-%s", var.project, local.suffix)
   bucket_media     = format("%s-media-%s", var.project, local.suffix)
   bucket_analytics = format("%s-analytics-%s", var.project, local.suffix)
+  bucket_config    = format("%s-config-%s", var.project, local.suffix)
 
   # Del Stream solo interesa la META de las solicitudes al crearse o cambiar.
   # Deja afuera los pasos SEG#, los perfiles, los catalogos y los borrados

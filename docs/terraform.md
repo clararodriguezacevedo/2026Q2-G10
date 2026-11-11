@@ -1,8 +1,8 @@
 # Terraform
 
 Toda la infraestructura está en terraform/organization, con un archivo por capa (network,
-compute, api, auth, database, storage, frontend, secrets, eventos, notificaciones, analytics y
-observabilidad), más variables, outputs, locals y data sources. El state se explica en el
+compute, api, auth, database, storage, frontend, secrets, eventos, notificaciones, analytics,
+observabilidad y seguridad), más variables, outputs, locals y data sources. El state se explica en el
 [README](../README.md#state).
 
 ## Módulos
@@ -24,9 +24,11 @@ agregamos los Gateway Endpoints de S3 y DynamoDB y el security group de las Lamb
 Todo lo que puede cambiar entre cuentas o entornos es una variable con un default que funciona.
 Entre otras, la región, el prefijo de nombres, el CIDR de la VPC y las AZs, la memoria y el
 timeout de las Lambdas, el throttling de la API, la contraseña de los usuarios de demo (marcada
-como sensitive), la key de Google Maps, cuántos mails se mandan en paralelo (email_max_concurrency) y un
-mail opcional para las alarmas (alarm_email). Las que pueden romper algo tienen validation, por
-ejemplo el prefijo tiene que servir como nombre de bucket y el CIDR tiene que ser válido.
+como sensitive), la key de Google Maps, cuántos mails se mandan en paralelo (email_max_concurrency), un
+mail opcional para las alarmas (alarm_email) y qué servicios de seguridad se activan
+(servicios_seguridad). Las que pueden romper algo tienen validation, por
+ejemplo el prefijo tiene que servir como nombre de bucket, el CIDR tiene que ser válido y Security
+Hub no se puede prender sin Config.
 
 Los outputs más útiles son frontend_url, api_url y hosted_ui_login_url, que el workflow de
 deploy muestra al final. También salen los nombres de la tabla y los buckets, los datos de
@@ -58,8 +60,9 @@ usuarios de demo y sus ítems de membresía, los ítems del seed, los eventos de
 archivos del front, una alarma por cada DLQ y por cada cola, las tablas de dimensiones y las
 consultas guardadas de Athena.
 
-count crea la resource policy de DynamoDB solo si restrict_dynamodb_to_vpc está en true y
-suscribe el mail de alarmas solo si se pasa uno.
+count crea la resource policy de DynamoDB solo si restrict_dynamodb_to_vpc está en true,
+suscribe el mail de alarmas solo si se pasa uno y prende cada servicio de seguridad (GuardDuty,
+Inspector, Config y Security Hub) según servicios_seguridad.
 
 depends_on cubre los casos donde no hay una referencia que ordene las cosas. El log group existe
 antes que la función, S3 y SNS tienen permiso para invocar a cada Lambda antes de registrarla, la
