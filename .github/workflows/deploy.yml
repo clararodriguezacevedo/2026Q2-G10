@@ -73,8 +73,13 @@ jobs:
       - name: Bootstrap del state (si falta el bucket)
         run: |
           BUCKET="barriofix-tfstate-${ACCOUNT_ID}"
-          if aws s3api head-bucket --bucket "$BUCKET" 2>/dev/null; then
+          # Solo se crea si head-bucket dice que no existe (404). Cualquier otro error
+          # (credenciales vencidas, sin permisos) corta el deploy en vez de intentar crearlo
+          if SALIDA=$(aws s3api head-bucket --bucket "$BUCKET" 2>&1); then
             echo "El bucket de state ya existe."
+          elif ! echo "$SALIDA" | grep -qE "\(404\)|Not Found"; then
+            echo "::error::No se pudo verificar el bucket de state. ¿Credenciales del lab vencidas o sesión detenida? $SALIDA"
+            exit 1
           else
             echo "Creando el bucket de state..."
             cd terraform/bootstrap
