@@ -77,7 +77,8 @@ envíos del proveedor.
 
 Cada cola tiene su DLQ, y cada Lambda invocada por SNS tiene un destino de fallo a otra DLQ. Un
 mensaje que agota los reintentos queda ahí en vez de perderse, y una alarma de CloudWatch avisa
-apenas aparece uno. Otra alarma avisa si una cola tiene mensajes de más de 15 minutos.
+apenas aparece uno. Otra alarma avisa si una cola tiene mensajes de más de 15 minutos. Las alarmas
+publican en un topic de SNS (barriofix-alarmas), que las manda por mail si se configura una dirección.
 
 ## Notificaciones por mail
 
