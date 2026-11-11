@@ -62,12 +62,23 @@ resource "aws_vpc_endpoint" "s3" {
 
   policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [{
-      Effect    = "Allow"
-      Principal = "*"
-      Action    = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
-      Resource  = ["arn:aws:s3:::${local.bucket_media}/*"]
-    }]
+    Statement = [
+      {
+        Sid       = "FotosDeLasSolicitudes"
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+        Resource  = ["arn:aws:s3:::${local.bucket_media}/*"]
+      },
+      {
+        # La Lambda analytics solo agrega eventos, no lee ni borra
+        Sid       = "EventosDeAnalytics"
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = ["s3:PutObject"]
+        Resource  = ["arn:aws:s3:::${local.bucket_analytics}/eventos/*"]
+      },
+    ]
   })
 
   tags = { Name = "${var.project}-s3" }

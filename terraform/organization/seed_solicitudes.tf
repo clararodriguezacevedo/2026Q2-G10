@@ -9,6 +9,17 @@
 # Los datos y la forma salen de seed/solicitudes.json y de los locals
 # solicitudes_by_id / seguimientos_seed.
 
+# Momento del primer apply, guardado en el state. timestamp() cambia en cada
+# plan; con ignore_changes el output queda fijo, asi las fechas del seed en
+# DynamoDB y los eventos de analytics en S3 salen siempre del mismo instante
+resource "terraform_data" "seed_ancla" {
+  input = timestamp()
+
+  lifecycle {
+    ignore_changes = [input]
+  }
+}
+
 # META de cada solicitud. Atributos de GSI segun el estado:
 #   pendiente_categoria (N) solo si esta PENDIENTE  -> indice "pendientes"
 #   id_profesional (S) solo si hay profesional      -> indice "por_profesional"

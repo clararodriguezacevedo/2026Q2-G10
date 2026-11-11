@@ -48,6 +48,26 @@ output "frontend_url" {
   value       = "http://${local.bucket_front}.s3-website-${var.region}.amazonaws.com"
 }
 
+output "eventos_topic_arn" {
+  description = "Topic SNS donde se publican los eventos de las solicitudes"
+  value       = aws_sns_topic.eventos.arn
+}
+
+output "analytics_bucket" {
+  description = "Bucket con los eventos crudos para Athena"
+  value       = awscc_s3_bucket.analytics.bucket_name
+}
+
+output "athena_workgroup" {
+  description = "Workgroup de Athena con las consultas de negocio guardadas"
+  value       = aws_athena_workgroup.analytics.name
+}
+
+output "smtp_secret_arn" {
+  description = "Secreto con la credencial SMTP; el valor real lo carga el pipeline, no Terraform"
+  value       = aws_secretsmanager_secret.smtp.arn
+}
+
 output "vpc_id" {
   description = "ID de la VPC que crea el modulo externo"
   value       = module.vpc.vpc_id

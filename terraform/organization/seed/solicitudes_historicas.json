@@ -1,0 +1,2705 @@
+[
+  {
+    "id": "HIST0000000000000000000001",
+    "cliente": "juan.perez",
+    "id_categoria": 1,
+    "id_urgencia": 3,
+    "id_zona": 36,
+    "titulo": "Inodoro que no deja de cargar",
+    "descripcion": "El depósito sigue cargando agua todo el tiempo, se escucha a la noche.",
+    "direccion": "Thames 2770, Villa Crespo",
+    "creada_hace_horas": 1422,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 39,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 4,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "PENDIENTE",
+        "actor": "diego.plomero",
+        "profesional": null,
+        "offset_horas": 15,
+        "motivo": "Diego Martínez canceló la asignación. La solicitud vuelve a estar disponible"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 39,
+        "motivo": "El cliente canceló la solicitud: el profesional la soltó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000002",
+    "cliente": "martin.lopez",
+    "id_categoria": 15,
+    "id_urgencia": 3,
+    "id_zona": 8,
+    "titulo": "Configurar router nuevo",
+    "descripcion": "Cambiamos de proveedor y hay que configurar el router.",
+    "direccion": "Rosario 3858, Caballito",
+    "creada_hace_horas": 1403,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 33,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 3,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "PENDIENTE",
+        "actor": "federico.tecnico",
+        "profesional": null,
+        "offset_horas": 15,
+        "motivo": "Federico Torres canceló la asignación. La solicitud vuelve a estar disponible"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 33,
+        "motivo": "El cliente canceló la solicitud: el profesional la soltó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000003",
+    "cliente": "juan.perez",
+    "id_categoria": 7,
+    "id_urgencia": 2,
+    "id_zona": 21,
+    "titulo": "Pintar un dormitorio",
+    "descripcion": "Dormitorio de 3x3, paredes y techo.",
+    "direccion": "Av. Santa Fe 5349, Palermo",
+    "creada_hace_horas": 1382,
+    "estado": "RESUELTO",
+    "profesional": "pablo.pintor",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 3,
+        "motivo": "Pablo Sánchez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 8,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 36,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000004",
+    "cliente": "martin.lopez",
+    "id_categoria": 2,
+    "id_urgencia": 2,
+    "id_zona": 28,
+    "titulo": "Salta la térmica del baño",
+    "descripcion": "Cuando se prende la estufa del baño salta la térmica.",
+    "direccion": "Junín 2334, Recoleta",
+    "creada_hace_horas": 1377,
+    "estado": "RESUELTO",
+    "profesional": "carlos.electricista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 1,
+        "motivo": "Carlos Gómez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 30,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 41,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000005",
+    "cliente": "valentina.romero",
+    "id_categoria": 3,
+    "id_urgencia": 3,
+    "id_zona": 40,
+    "titulo": "Calefón que se apaga solo",
+    "descripcion": "El calefón prende y a los pocos minutos se apaga.",
+    "direccion": "Murguiondo 4176, Villa Lugano",
+    "creada_hace_horas": 1375,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 28,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 28,
+        "motivo": "La cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000006",
+    "cliente": "sofia.garcia",
+    "id_categoria": 12,
+    "id_urgencia": 1,
+    "id_zona": 5,
+    "titulo": "Ajustar puertas de la alacena",
+    "descripcion": "Las puertas de la alacena no cierran bien.",
+    "direccion": "Av. Cabildo 3742, Belgrano",
+    "creada_hace_horas": 1349,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 36,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 36,
+        "motivo": "La cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000007",
+    "cliente": "valentina.romero",
+    "id_categoria": 1,
+    "id_urgencia": 2,
+    "id_zona": 16,
+    "titulo": "Inodoro que no deja de cargar",
+    "descripcion": "El depósito sigue cargando agua todo el tiempo, se escucha a la noche.",
+    "direccion": "Tandil 1594, Mataderos",
+    "creada_hace_horas": 1321,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 61,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 76,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 114,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000008",
+    "cliente": "juan.perez",
+    "id_categoria": 5,
+    "id_urgencia": 3,
+    "id_zona": 36,
+    "titulo": "Me quedé afuera",
+    "descripcion": "Se rompió la llave dentro de la cerradura de la puerta de entrada.",
+    "direccion": "Av. Corrientes 1873, Villa Crespo",
+    "creada_hace_horas": 1310,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 56,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 56,
+        "motivo": "El cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000009",
+    "cliente": "sofia.garcia",
+    "id_categoria": 1,
+    "id_urgencia": 2,
+    "id_zona": 20,
+    "titulo": "Canilla de la cocina que gotea",
+    "descripcion": "La canilla monocomando gotea aunque esté bien cerrada.",
+    "direccion": "Av. del Libertador 3672, Núñez",
+    "creada_hace_horas": 1305,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 4,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 25,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 35,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000010",
+    "cliente": "valentina.romero",
+    "id_categoria": 2,
+    "id_urgencia": 2,
+    "id_zona": 16,
+    "titulo": "Tomacorriente quemado en el living",
+    "descripcion": "Un toma quedó negro y no anda, huele a quemado.",
+    "direccion": "Lisandro de la Torre 3495, Mataderos",
+    "creada_hace_horas": 1302,
+    "estado": "RESUELTO",
+    "profesional": "carlos.electricista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 4,
+      "comentario": "Bien resuelto, aunque costó coordinar el horario.",
+      "offset_horas": 73
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 26,
+        "motivo": "Carlos Gómez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 52,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 69,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000011",
+    "cliente": "valentina.romero",
+    "id_categoria": 12,
+    "id_urgencia": 3,
+    "id_zona": 16,
+    "titulo": "Puerta del placard descolgada",
+    "descripcion": "Se salió una bisagra y la puerta quedó colgando.",
+    "direccion": "Tandil 4697, Mataderos",
+    "creada_hace_horas": 1300,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 25,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 25,
+        "motivo": "La cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000012",
+    "cliente": "lucas.fernandez",
+    "id_categoria": 4,
+    "id_urgencia": 1,
+    "id_zona": 16,
+    "titulo": "El aire no enfría",
+    "descripcion": "Prende y tira aire pero no enfría nada.",
+    "direccion": "Tandil 5139, Mataderos",
+    "creada_hace_horas": 1292,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 52,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "lucas.fernandez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "lucas.fernandez",
+        "profesional": null,
+        "offset_horas": 52,
+        "motivo": "El cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000013",
+    "cliente": "valentina.romero",
+    "id_categoria": 1,
+    "id_urgencia": 3,
+    "id_zona": 40,
+    "titulo": "Canilla de la cocina que gotea",
+    "descripcion": "La canilla monocomando gotea aunque esté bien cerrada.",
+    "direccion": "Av. Riestra 5723, Villa Lugano",
+    "creada_hace_horas": 1266,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 71,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 71,
+        "motivo": "La cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000014",
+    "cliente": "martin.lopez",
+    "id_categoria": 3,
+    "id_urgencia": 2,
+    "id_zona": 8,
+    "titulo": "Olor a gas en la cocina",
+    "descripcion": "Hay olor a gas cerca de la cocina, cerramos la llave por las dudas.",
+    "direccion": "Rosario 3513, Caballito",
+    "creada_hace_horas": 1264,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Impecable, rápido y muy prolijo.",
+      "offset_horas": 72
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 5,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 32,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 48,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000015",
+    "cliente": "juan.perez",
+    "id_categoria": 3,
+    "id_urgencia": 1,
+    "id_zona": 21,
+    "titulo": "Revisión de estufa a gas",
+    "descripcion": "Antes del invierno quiero que revisen la estufa del living.",
+    "direccion": "Gurruchaga 335, Palermo",
+    "creada_hace_horas": 1250,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Resolvió todo en una visita.",
+      "offset_horas": 68
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 19,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 39,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 48,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000016",
+    "cliente": "lucas.fernandez",
+    "id_categoria": 3,
+    "id_urgencia": 3,
+    "id_zona": 16,
+    "titulo": "Olor a gas en la cocina",
+    "descripcion": "Hay olor a gas cerca de la cocina, cerramos la llave por las dudas.",
+    "direccion": "Av. Directorio 1125, Mataderos",
+    "creada_hace_horas": 1235,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 41,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "lucas.fernandez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "lucas.fernandez",
+        "profesional": null,
+        "offset_horas": 41,
+        "motivo": "El cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000017",
+    "cliente": "valentina.romero",
+    "id_categoria": 2,
+    "id_urgencia": 3,
+    "id_zona": 40,
+    "titulo": "Instalar luces en el pasillo",
+    "descripcion": "Quiero poner dos apliques nuevos en el pasillo.",
+    "direccion": "Cosquín 4963, Villa Lugano",
+    "creada_hace_horas": 1217,
+    "estado": "RESUELTO",
+    "profesional": "carlos.electricista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 4,
+      "comentario": "Buen trabajo, tardó un poco en venir.",
+      "offset_horas": 86
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 43,
+        "motivo": "Carlos Gómez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 52,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 57,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000018",
+    "cliente": "lucas.fernandez",
+    "id_categoria": 1,
+    "id_urgencia": 3,
+    "id_zona": 47,
+    "titulo": "Pierde agua el flexible del lavatorio",
+    "descripcion": "Gotea la conexión del lavatorio y moja el mueble de abajo.",
+    "direccion": "Av. Castañares 2089, Villa Soldati",
+    "creada_hace_horas": 1152,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "lucas.fernandez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 60,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 84,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 90,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000019",
+    "cliente": "lucas.fernandez",
+    "id_categoria": 4,
+    "id_urgencia": 1,
+    "id_zona": 47,
+    "titulo": "Service de aire acondicionado",
+    "descripcion": "Limpieza y carga de gas del split del dormitorio.",
+    "direccion": "Av. Castañares 3848, Villa Soldati",
+    "creada_hace_horas": 1150,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 4,
+      "comentario": "Bien resuelto, aunque costó coordinar el horario.",
+      "offset_horas": 103
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "lucas.fernandez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 37,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 62,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 90,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000020",
+    "cliente": "sofia.garcia",
+    "id_categoria": 4,
+    "id_urgencia": 3,
+    "id_zona": 5,
+    "titulo": "Service de aire acondicionado",
+    "descripcion": "Limpieza y carga de gas del split del dormitorio.",
+    "direccion": "Mendoza 5853, Belgrano",
+    "creada_hace_horas": 1145,
+    "estado": "RESUELTO",
+    "profesional": "federico.tecnico",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 3,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 30,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 76,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000021",
+    "cliente": "juan.perez",
+    "id_categoria": 3,
+    "id_urgencia": 3,
+    "id_zona": 36,
+    "titulo": "Calefón que se apaga solo",
+    "descripcion": "El calefón prende y a los pocos minutos se apaga.",
+    "direccion": "Av. Corrientes 1878, Villa Crespo",
+    "creada_hace_horas": 1135,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 2,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 25,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 33,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000022",
+    "cliente": "sofia.garcia",
+    "id_categoria": 14,
+    "id_urgencia": 2,
+    "id_zona": 20,
+    "titulo": "Heladera que no enfría abajo",
+    "descripcion": "El freezer anda pero la parte de abajo está tibia.",
+    "direccion": "Crisólogo Larralde 5521, Núñez",
+    "creada_hace_horas": 1116,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 43,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 3,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "PENDIENTE",
+        "actor": "federico.tecnico",
+        "profesional": null,
+        "offset_horas": 22,
+        "motivo": "Federico Torres canceló la asignación. La solicitud vuelve a estar disponible"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 43,
+        "motivo": "La cliente canceló la solicitud: el profesional la soltó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000023",
+    "cliente": "juan.perez",
+    "id_categoria": 1,
+    "id_urgencia": 2,
+    "id_zona": 21,
+    "titulo": "Pierde agua el flexible del lavatorio",
+    "descripcion": "Gotea la conexión del lavatorio y moja el mueble de abajo.",
+    "direccion": "Thames 2499, Palermo",
+    "creada_hace_horas": 1111,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 1,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 7,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 37,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000024",
+    "cliente": "sofia.garcia",
+    "id_categoria": 2,
+    "id_urgencia": 3,
+    "id_zona": 20,
+    "titulo": "Salta la térmica del baño",
+    "descripcion": "Cuando se prende la estufa del baño salta la térmica.",
+    "direccion": "Manuela Pedraza 4502, Núñez",
+    "creada_hace_horas": 1108,
+    "estado": "RESUELTO",
+    "profesional": "carlos.electricista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 4,
+        "motivo": "Carlos Gómez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 30,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 63,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000025",
+    "cliente": "martin.lopez",
+    "id_categoria": 2,
+    "id_urgencia": 2,
+    "id_zona": 28,
+    "titulo": "Salta la térmica del baño",
+    "descripcion": "Cuando se prende la estufa del baño salta la térmica.",
+    "direccion": "Junín 1871, Recoleta",
+    "creada_hace_horas": 1065,
+    "estado": "RESUELTO",
+    "profesional": "carlos.electricista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 4,
+      "comentario": "Bien resuelto, aunque costó coordinar el horario.",
+      "offset_horas": 75
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 2,
+        "motivo": "Carlos Gómez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 19,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 62,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000026",
+    "cliente": "sofia.garcia",
+    "id_categoria": 4,
+    "id_urgencia": 2,
+    "id_zona": 20,
+    "titulo": "Aire acondicionado que gotea adentro",
+    "descripcion": "El split gotea agua por la unidad interior.",
+    "direccion": "Av. del Libertador 4651, Núñez",
+    "creada_hace_horas": 1040,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Excelente, lo recomiendo.",
+      "offset_horas": 57
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 1,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 24,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 45,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000027",
+    "cliente": "sofia.garcia",
+    "id_categoria": 4,
+    "id_urgencia": 1,
+    "id_zona": 20,
+    "titulo": "Service de aire acondicionado",
+    "descripcion": "Limpieza y carga de gas del split del dormitorio.",
+    "direccion": "Crisólogo Larralde 4140, Núñez",
+    "creada_hace_horas": 1004,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Resolvió todo en una visita.",
+      "offset_horas": 102
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 15,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "PENDIENTE",
+        "actor": "federico.tecnico",
+        "profesional": null,
+        "offset_horas": 34,
+        "motivo": "Federico Torres canceló la asignación. La solicitud vuelve a estar disponible"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 58,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 79,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 91,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000028",
+    "cliente": "martin.lopez",
+    "id_categoria": 3,
+    "id_urgencia": 3,
+    "id_zona": 28,
+    "titulo": "Olor a gas en la cocina",
+    "descripcion": "Hay olor a gas cerca de la cocina, cerramos la llave por las dudas.",
+    "direccion": "Av. Callao 3633, Recoleta",
+    "creada_hace_horas": 968,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Resolvió todo en una visita.",
+      "offset_horas": 77
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 3,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 29,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 59,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000029",
+    "cliente": "juan.perez",
+    "id_categoria": 2,
+    "id_urgencia": 1,
+    "id_zona": 21,
+    "titulo": "Tomacorriente quemado en el living",
+    "descripcion": "Un toma quedó negro y no anda, huele a quemado.",
+    "direccion": "Av. Santa Fe 3372, Palermo",
+    "creada_hace_horas": 960,
+    "estado": "RESUELTO",
+    "profesional": "carlos.electricista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 4,
+      "comentario": "Bien resuelto, aunque costó coordinar el horario.",
+      "offset_horas": 80
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 12,
+        "motivo": "Carlos Gómez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 23,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "carlos.electricista",
+        "profesional": "carlos.electricista",
+        "offset_horas": 69,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000030",
+    "cliente": "martin.lopez",
+    "id_categoria": 1,
+    "id_urgencia": 2,
+    "id_zona": 8,
+    "titulo": "Canilla de la cocina que gotea",
+    "descripcion": "La canilla monocomando gotea aunque esté bien cerrada.",
+    "direccion": "Av. Rivadavia 3374, Caballito",
+    "creada_hace_horas": 960,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Excelente, lo recomiendo.",
+      "offset_horas": 83
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 9,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 38,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 71,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000031",
+    "cliente": "martin.lopez",
+    "id_categoria": 25,
+    "id_urgencia": 3,
+    "id_zona": 28,
+    "titulo": "Pared con salitre en el comedor",
+    "descripcion": "La pared de abajo tiene salitre y la pintura se descascara.",
+    "direccion": "Junín 2775, Recoleta",
+    "creada_hace_horas": 955,
+    "estado": "RESUELTO",
+    "profesional": "pablo.pintor",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Resolvió todo en una visita.",
+      "offset_horas": 80
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 9,
+        "motivo": "Pablo Sánchez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 35,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 60,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000032",
+    "cliente": "lucas.fernandez",
+    "id_categoria": 1,
+    "id_urgencia": 3,
+    "id_zona": 16,
+    "titulo": "Inodoro que no deja de cargar",
+    "descripcion": "El depósito sigue cargando agua todo el tiempo, se escucha a la noche.",
+    "direccion": "Av. Directorio 5065, Mataderos",
+    "creada_hace_horas": 944,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 4,
+      "comentario": "Bien resuelto, aunque costó coordinar el horario.",
+      "offset_horas": 71
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "lucas.fernandez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 40,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 58,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 63,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000033",
+    "cliente": "lucas.fernandez",
+    "id_categoria": 7,
+    "id_urgencia": 2,
+    "id_zona": 47,
+    "titulo": "Pintar un dormitorio",
+    "descripcion": "Dormitorio de 3x3, paredes y techo.",
+    "direccion": "Av. Castañares 5531, Villa Soldati",
+    "creada_hace_horas": 942,
+    "estado": "RESUELTO",
+    "profesional": "pablo.pintor",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 4,
+      "comentario": "Bien resuelto, aunque costó coordinar el horario.",
+      "offset_horas": 105
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "lucas.fernandez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 48,
+        "motivo": "Pablo Sánchez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 63,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 75,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000034",
+    "cliente": "martin.lopez",
+    "id_categoria": 3,
+    "id_urgencia": 3,
+    "id_zona": 28,
+    "titulo": "Revisión de estufa a gas",
+    "descripcion": "Antes del invierno quiero que revisen la estufa del living.",
+    "direccion": "Av. Callao 3110, Recoleta",
+    "creada_hace_horas": 919,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Excelente, lo recomiendo.",
+      "offset_horas": 45
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 5,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 10,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 36,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000035",
+    "cliente": "valentina.romero",
+    "id_categoria": 2,
+    "id_urgencia": 1,
+    "id_zona": 16,
+    "titulo": "Tomacorriente quemado en el living",
+    "descripcion": "Un toma quedó negro y no anda, huele a quemado.",
+    "direccion": "Av. Directorio 5387, Mataderos",
+    "creada_hace_horas": 912,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 63,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 63,
+        "motivo": "La cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000036",
+    "cliente": "lucas.fernandez",
+    "id_categoria": 7,
+    "id_urgencia": 2,
+    "id_zona": 16,
+    "titulo": "Retocar paredes del pasillo",
+    "descripcion": "Quedaron marcas y algunas manchas después de una mudanza.",
+    "direccion": "Tandil 971, Mataderos",
+    "creada_hace_horas": 899,
+    "estado": "RESUELTO",
+    "profesional": "pablo.pintor",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 4,
+      "comentario": "Bien resuelto, aunque costó coordinar el horario.",
+      "offset_horas": 88
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "lucas.fernandez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 44,
+        "motivo": "Pablo Sánchez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 58,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 65,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000037",
+    "cliente": "sofia.garcia",
+    "id_categoria": 5,
+    "id_urgencia": 1,
+    "id_zona": 20,
+    "titulo": "Me quedé afuera",
+    "descripcion": "Se rompió la llave dentro de la cerradura de la puerta de entrada.",
+    "direccion": "Crisólogo Larralde 4413, Núñez",
+    "creada_hace_horas": 894,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 30,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 30,
+        "motivo": "La cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000038",
+    "cliente": "juan.perez",
+    "id_categoria": 1,
+    "id_urgencia": 3,
+    "id_zona": 21,
+    "titulo": "Inodoro que no deja de cargar",
+    "descripcion": "El depósito sigue cargando agua todo el tiempo, se escucha a la noche.",
+    "direccion": "Thames 5070, Palermo",
+    "creada_hace_horas": 880,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Impecable, rápido y muy prolijo.",
+      "offset_horas": 72
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 3,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 30,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 50,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000039",
+    "cliente": "sofia.garcia",
+    "id_categoria": 4,
+    "id_urgencia": 1,
+    "id_zona": 20,
+    "titulo": "Service de aire acondicionado",
+    "descripcion": "Limpieza y carga de gas del split del dormitorio.",
+    "direccion": "Manuela Pedraza 4526, Núñez",
+    "creada_hace_horas": 875,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Impecable, rápido y muy prolijo.",
+      "offset_horas": 93
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 2,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 26,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 69,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000040",
+    "cliente": "sofia.garcia",
+    "id_categoria": 25,
+    "id_urgencia": 3,
+    "id_zona": 20,
+    "titulo": "Mancha de humedad en el techo del baño",
+    "descripcion": "Apareció una mancha que crece después de cada lluvia.",
+    "direccion": "Av. del Libertador 2562, Núñez",
+    "creada_hace_horas": 872,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 2,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 16,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 48,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000041",
+    "cliente": "valentina.romero",
+    "id_categoria": 2,
+    "id_urgencia": 3,
+    "id_zona": 40,
+    "titulo": "Instalar luces en el pasillo",
+    "descripcion": "Quiero poner dos apliques nuevos en el pasillo.",
+    "direccion": "Murguiondo 1293, Villa Lugano",
+    "creada_hace_horas": 869,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 40,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "valentina.romero",
+        "profesional": null,
+        "offset_horas": 40,
+        "motivo": "La cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000042",
+    "cliente": "martin.lopez",
+    "id_categoria": 25,
+    "id_urgencia": 3,
+    "id_zona": 28,
+    "titulo": "Mancha de humedad en el techo del baño",
+    "descripcion": "Apareció una mancha que crece después de cada lluvia.",
+    "direccion": "Av. Callao 3563, Recoleta",
+    "creada_hace_horas": 837,
+    "estado": "CANCELADO",
+    "profesional": "pablo.pintor",
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 44,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 8,
+        "motivo": "Pablo Sánchez aceptó la solicitud"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 44,
+        "motivo": "El cliente canceló la solicitud: el profesional no vino"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000043",
+    "cliente": "juan.perez",
+    "id_categoria": 7,
+    "id_urgencia": 3,
+    "id_zona": 36,
+    "titulo": "Pintar un dormitorio",
+    "descripcion": "Dormitorio de 3x3, paredes y techo.",
+    "direccion": "Av. Corrientes 3708, Villa Crespo",
+    "creada_hace_horas": 826,
+    "estado": "RESUELTO",
+    "profesional": "pablo.pintor",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Excelente, lo recomiendo.",
+      "offset_horas": 76
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 2,
+        "motivo": "Pablo Sánchez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 31,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 54,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000044",
+    "cliente": "juan.perez",
+    "id_categoria": 5,
+    "id_urgencia": 2,
+    "id_zona": 36,
+    "titulo": "Cambiar cerradura de la puerta",
+    "descripcion": "Quiero cambiar la cerradura por una de seguridad.",
+    "direccion": "Av. Corrientes 1701, Villa Crespo",
+    "creada_hace_horas": 804,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 67,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 67,
+        "motivo": "El cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000045",
+    "cliente": "juan.perez",
+    "id_categoria": 1,
+    "id_urgencia": 3,
+    "id_zona": 21,
+    "titulo": "Canilla de la cocina que gotea",
+    "descripcion": "La canilla monocomando gotea aunque esté bien cerrada.",
+    "direccion": "Av. Santa Fe 349, Palermo",
+    "creada_hace_horas": 752,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 3,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 18,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 62,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000046",
+    "cliente": "sofia.garcia",
+    "id_categoria": 4,
+    "id_urgencia": 3,
+    "id_zona": 5,
+    "titulo": "Service de aire acondicionado",
+    "descripcion": "Limpieza y carga de gas del split del dormitorio.",
+    "direccion": "Mendoza 1923, Belgrano",
+    "creada_hace_horas": 712,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 3,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "PENDIENTE",
+        "actor": "federico.tecnico",
+        "profesional": null,
+        "offset_horas": 7,
+        "motivo": "Federico Torres canceló la asignación. La solicitud vuelve a estar disponible"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 33,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 50,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 60,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000047",
+    "cliente": "martin.lopez",
+    "id_categoria": 12,
+    "id_urgencia": 3,
+    "id_zona": 8,
+    "titulo": "Puerta del placard descolgada",
+    "descripcion": "Se salió una bisagra y la puerta quedó colgando.",
+    "direccion": "José Bonifacio 4689, Caballito",
+    "creada_hace_horas": 710,
+    "estado": "PENDIENTE",
+    "profesional": null,
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000048",
+    "cliente": "juan.perez",
+    "id_categoria": 3,
+    "id_urgencia": 3,
+    "id_zona": 36,
+    "titulo": "Revisión de estufa a gas",
+    "descripcion": "Antes del invierno quiero que revisen la estufa del living.",
+    "direccion": "Malabia 675, Villa Crespo",
+    "creada_hace_horas": 706,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Resolvió todo en una visita.",
+      "offset_horas": 50
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 2,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 20,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 47,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000049",
+    "cliente": "juan.perez",
+    "id_categoria": 4,
+    "id_urgencia": 3,
+    "id_zona": 36,
+    "titulo": "Aire acondicionado que gotea adentro",
+    "descripcion": "El split gotea agua por la unidad interior.",
+    "direccion": "Malabia 478, Villa Crespo",
+    "creada_hace_horas": 648,
+    "estado": "RESUELTO",
+    "profesional": "federico.tecnico",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 3,
+      "comentario": "Cumplió, nada más.",
+      "offset_horas": 63
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 10,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 14,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 58,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000050",
+    "cliente": "sofia.garcia",
+    "id_categoria": 25,
+    "id_urgencia": 3,
+    "id_zona": 20,
+    "titulo": "Mancha de humedad en el techo del baño",
+    "descripcion": "Apareció una mancha que crece después de cada lluvia.",
+    "direccion": "Crisólogo Larralde 2086, Núñez",
+    "creada_hace_horas": 621,
+    "estado": "RESUELTO",
+    "profesional": "pablo.pintor",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 12,
+        "motivo": "Pablo Sánchez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 28,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 46,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000051",
+    "cliente": "juan.perez",
+    "id_categoria": 3,
+    "id_urgencia": 2,
+    "id_zona": 21,
+    "titulo": "Olor a gas en la cocina",
+    "descripcion": "Hay olor a gas cerca de la cocina, cerramos la llave por las dudas.",
+    "direccion": "Thames 3251, Palermo",
+    "creada_hace_horas": 605,
+    "estado": "RESUELTO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Excelente, lo recomiendo.",
+      "offset_horas": 40
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 5,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 14,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 23,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000052",
+    "cliente": "martin.lopez",
+    "id_categoria": 25,
+    "id_urgencia": 2,
+    "id_zona": 28,
+    "titulo": "Mancha de humedad en el techo del baño",
+    "descripcion": "Apareció una mancha que crece después de cada lluvia.",
+    "direccion": "Peña 3118, Recoleta",
+    "creada_hace_horas": 568,
+    "estado": "RESUELTO",
+    "profesional": "pablo.pintor",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Impecable, rápido y muy prolijo.",
+      "offset_horas": 59
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 2,
+        "motivo": "Pablo Sánchez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 25,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 30,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000053",
+    "cliente": "juan.perez",
+    "id_categoria": 14,
+    "id_urgencia": 2,
+    "id_zona": 21,
+    "titulo": "El lavarropas no centrifuga",
+    "descripcion": "Lava pero en el centrifugado se frena y queda la ropa empapada.",
+    "direccion": "Gurruchaga 3165, Palermo",
+    "creada_hace_horas": 447,
+    "estado": "RESUELTO",
+    "profesional": "federico.tecnico",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 3,
+      "comentario": "Lo resolvió, pero tuve que esperar bastante.",
+      "offset_horas": 87
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 3,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 17,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 64,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000054",
+    "cliente": "sofia.garcia",
+    "id_categoria": 1,
+    "id_urgencia": 3,
+    "id_zona": 20,
+    "titulo": "Pierde agua el flexible del lavatorio",
+    "descripcion": "Gotea la conexión del lavatorio y moja el mueble de abajo.",
+    "direccion": "Crisólogo Larralde 3925, Núñez",
+    "creada_hace_horas": 443,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 2,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 7,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 53,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000055",
+    "cliente": "martin.lopez",
+    "id_categoria": 14,
+    "id_urgencia": 2,
+    "id_zona": 28,
+    "titulo": "El lavarropas no centrifuga",
+    "descripcion": "Lava pero en el centrifugado se frena y queda la ropa empapada.",
+    "direccion": "Junín 2224, Recoleta",
+    "creada_hace_horas": 418,
+    "estado": "RESUELTO",
+    "profesional": "federico.tecnico",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 4,
+      "comentario": "Buen trabajo, tardó un poco en venir.",
+      "offset_horas": 20
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 4,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 10,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 18,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000056",
+    "cliente": "juan.perez",
+    "id_categoria": 1,
+    "id_urgencia": 2,
+    "id_zona": 36,
+    "titulo": "Canilla de la cocina que gotea",
+    "descripcion": "La canilla monocomando gotea aunque esté bien cerrada.",
+    "direccion": "Av. Corrientes 832, Villa Crespo",
+    "creada_hace_horas": 396,
+    "estado": "RESUELTO",
+    "profesional": "diego.plomero",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": {
+      "puntuacion": 5,
+      "comentario": "Excelente, lo recomiendo.",
+      "offset_horas": 45
+    },
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 2,
+        "motivo": "Diego Martínez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 15,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "diego.plomero",
+        "profesional": "diego.plomero",
+        "offset_horas": 42,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000057",
+    "cliente": "sofia.garcia",
+    "id_categoria": 4,
+    "id_urgencia": 2,
+    "id_zona": 5,
+    "titulo": "Aire acondicionado que gotea adentro",
+    "descripcion": "El split gotea agua por la unidad interior.",
+    "direccion": "Echeverría 4743, Belgrano",
+    "creada_hace_horas": 338,
+    "estado": "CANCELADO",
+    "profesional": "mariano.gasista",
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 59,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 10,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "PENDIENTE",
+        "actor": "federico.tecnico",
+        "profesional": null,
+        "offset_horas": 18,
+        "motivo": "Federico Torres canceló la asignación. La solicitud vuelve a estar disponible"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "mariano.gasista",
+        "profesional": "mariano.gasista",
+        "offset_horas": 33,
+        "motivo": "Mariano Rodríguez aceptó la solicitud"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 59,
+        "motivo": "La cliente canceló la solicitud: el profesional no vino"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000058",
+    "cliente": "sofia.garcia",
+    "id_categoria": 15,
+    "id_urgencia": 2,
+    "id_zona": 5,
+    "titulo": "Configurar router nuevo",
+    "descripcion": "Cambiamos de proveedor y hay que configurar el router.",
+    "direccion": "Av. Cabildo 833, Belgrano",
+    "creada_hace_horas": 332,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 36,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "federico.tecnico",
+        "profesional": "federico.tecnico",
+        "offset_horas": 11,
+        "motivo": "Federico Torres aceptó la solicitud"
+      },
+      {
+        "estado": "PENDIENTE",
+        "actor": "federico.tecnico",
+        "profesional": null,
+        "offset_horas": 23,
+        "motivo": "Federico Torres canceló la asignación. La solicitud vuelve a estar disponible"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "sofia.garcia",
+        "profesional": null,
+        "offset_horas": 36,
+        "motivo": "La cliente canceló la solicitud: el profesional la soltó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000059",
+    "cliente": "juan.perez",
+    "id_categoria": 12,
+    "id_urgencia": 3,
+    "id_zona": 36,
+    "titulo": "Ajustar puertas de la alacena",
+    "descripcion": "Las puertas de la alacena no cierran bien.",
+    "direccion": "Thames 781, Villa Crespo",
+    "creada_hace_horas": 290,
+    "estado": "CANCELADO",
+    "profesional": null,
+    "cancelada_por_cliente": true,
+    "cancelada_offset_horas": 37,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "CANCELADO",
+        "actor": "juan.perez",
+        "profesional": null,
+        "offset_horas": 37,
+        "motivo": "El cliente canceló la solicitud: nadie la tomó"
+      }
+    ]
+  },
+  {
+    "id": "HIST0000000000000000000060",
+    "cliente": "martin.lopez",
+    "id_categoria": 25,
+    "id_urgencia": 2,
+    "id_zona": 8,
+    "titulo": "Pared con salitre en el comedor",
+    "descripcion": "La pared de abajo tiene salitre y la pintura se descascara.",
+    "direccion": "Av. Rivadavia 2613, Caballito",
+    "creada_hace_horas": 274,
+    "estado": "RESUELTO",
+    "profesional": "pablo.pintor",
+    "cancelada_por_cliente": false,
+    "cancelada_offset_horas": null,
+    "calificacion": null,
+    "seguimiento": [
+      {
+        "estado": "PENDIENTE",
+        "actor": "martin.lopez",
+        "profesional": null,
+        "offset_horas": 0,
+        "motivo": "Solicitud publicada por el cliente"
+      },
+      {
+        "estado": "ASIGNADO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 2,
+        "motivo": "Pablo Sánchez aceptó la solicitud"
+      },
+      {
+        "estado": "EN_PROGRESO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 21,
+        "motivo": "El profesional comenzó el trabajo"
+      },
+      {
+        "estado": "RESUELTO",
+        "actor": "pablo.pintor",
+        "profesional": "pablo.pintor",
+        "offset_horas": 51,
+        "motivo": "Trabajo terminado"
+      }
+    ]
+  }
+]
