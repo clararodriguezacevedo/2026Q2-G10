@@ -86,6 +86,35 @@ resource "awscc_s3_bucket" "config" {
   }
 }
 
+# Config entrega el historial al bucket asumiendo su rol, asi que el bucket tiene
+# que dejarlo escribir. Sin esta policy, PutDeliveryChannel falla con
+# InsufficientDeliveryPolicyException
+resource "awscc_s3_bucket_policy" "config" {
+  count = local.seguridad.config ? 1 : 0
+
+  bucket = awscc_s3_bucket.config[0].id
+  policy_document = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "AclCheck"
+        Effect    = "Allow"
+        Principal = { Service = "config.amazonaws.com" }
+        Action    = ["s3:GetBucketAcl", "s3:ListBucket"]
+        Resource  = "arn:aws:s3:::${local.bucket_config}"
+      },
+      {
+        Sid       = "Write"
+        Effect    = "Allow"
+        Principal = { Service = "config.amazonaws.com" }
+        Action    = "s3:PutObject"
+        Resource  = "arn:aws:s3:::${local.bucket_config}/AWSLogs/${local.account_id}/Config/*"
+        Condition = { StringEquals = { "s3:x-amz-acl" = "bucket-owner-full-control" } }
+      },
+    ]
+  })
+}
+
 # Graba cada cambio de configuracion de esos recursos. Usa el LabRole porque en
 # el lab no se puede crear el rol de servicio de Config
 resource "aws_config_configuration_recorder" "this" {
@@ -106,8 +135,8 @@ resource "aws_config_delivery_channel" "this" {
   name           = var.project
   s3_bucket_name = awscc_s3_bucket.config[0].bucket_name
 
-  # El canal necesita que el recorder ya exista
-  depends_on = [aws_config_configuration_recorder.this]
+  # El canal necesita el recorder y que el bucket ya deje escribir a Config
+  depends_on = [aws_config_configuration_recorder.this, awscc_s3_bucket_policy.config]
 }
 
 resource "aws_config_configuration_recorder_status" "this" {

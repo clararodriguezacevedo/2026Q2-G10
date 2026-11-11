@@ -17,6 +17,7 @@ Todo corre sobre servicios administrados de AWS. Estos son los que usamos y para
 - Amazon CloudWatch: los logs de cada Lambda, métricas y alarmas sobre las colas.
 - AWS X-Ray: el tracing de las Lambdas.
 - AWS Shield Standard: protección contra ataques de red, activa por defecto en API Gateway y S3.
+- Amazon GuardDuty: detección de amenazas a nivel cuenta (actividad anómala en la API, en el DNS y en la red de las Lambdas).
 
 Fuera de AWS, el frontend usa Google Maps para la ubicación de cada solicitud y para elegir las
 zonas de un profesional, y los mails salen por SMTP a un proveedor externo (Mailtrap en la demo).
@@ -189,6 +190,11 @@ un flood no se coma el límite de concurrencia de toda la cuenta.
 No pusimos WAF. Solo se puede asociar a una REST API, a CloudFront o a un load balancer, no a una
 HTTP API, y CloudFront no está en el lab. Elegimos HTTP API por simple, más barata y con el
 authorizer de Cognito incluido, y cubrimos el abuso con throttling.
+
+Como capa de detección sumamos GuardDuty, que mira la actividad de la cuenta en busca de algo
+anómalo sin que las Lambdas tengan que llamarlo. Dejamos escritos pero apagados Inspector, Config y
+Security Hub: verificamos que el lab los bloquea (Inspector no está permitido, y Config no puede
+asumir el LabRole), pero quedan listos para una cuenta normal.
 
 ## Lo que marca el análisis estático
 

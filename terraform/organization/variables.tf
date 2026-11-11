@@ -128,14 +128,16 @@ variable "email_max_concurrency" {
 }
 
 variable "servicios_seguridad" {
-  description = "Servicios de deteccion a nivel cuenta que se activan. Apagados por defecto: en el Learner Lab hay que verificar que esten permitidos antes de prenderlos"
+  description = "Servicios de deteccion a nivel cuenta que se activan. Verificado el 2026-11-11 en el lab: GuardDuty anda; Inspector (inspector2 denegado), Config (el recorder no puede asumir el LabRole) y Security Hub (depende de Config) quedan apagados"
   type = object({
     guardduty    = optional(bool, false)
     inspector    = optional(bool, false)
     config       = optional(bool, false)
     security_hub = optional(bool, false)
   })
-  default = {}
+  default = {
+    guardduty = true
+  }
 
   # Los controles de Security Hub se evaluan con lo que graba Config
   validation {
