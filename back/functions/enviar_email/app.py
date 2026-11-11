@@ -63,7 +63,12 @@ def _enviar(config: dict, mensajes: list) -> list:
     try:
         with smtplib.SMTP(config["host"], int(config.get("port", 587)), timeout=10) as smtp:
             smtp.starttls(context=ssl.create_default_context())
-            smtp.login(config["usuario"], config["password"])
+            # PLAIN, ya con TLS. smtplib.login elige CRAM-MD5 primero si el servidor lo
+            # ofrece, y si ese intento falla Mailtrap corta la conexion: el error real
+            # (por ejemplo credenciales invalidas) se pierde. strip por si el secreto se
+            # copio con un espacio o un salto de linea al final
+            smtp.user, smtp.password = config["usuario"].strip(), config["password"].strip()
+            smtp.auth("PLAIN", smtp.auth_plain)
             for message_id, mails in mensajes:
                 for mail in mails:
                     try:
