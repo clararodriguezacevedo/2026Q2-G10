@@ -12,7 +12,7 @@ Todo corre sobre servicios administrados de AWS. Estos son los que usamos y para
 - Amazon SQS: las colas de analytics y de mails, y las colas de descarte (DLQ).
 - Amazon Athena y AWS Glue: consultas SQL sobre los eventos guardados en S3.
 - Amazon Cognito: registro y login con la Hosted UI, y emisión de los tokens.
-- AWS Secrets Manager: el client secret de Cognito y la credencial SMTP.
+- AWS Secrets Manager: el client secret de Cognito.
 - Amazon S3: el sitio estático del frontend, las fotos, los eventos de analytics y el state de Terraform.
 - Amazon VPC: subredes privadas para las Lambdas, con Gateway Endpoints a S3 y DynamoDB y un security group.
 - AWS IAM: el LabRole del lab, que es el rol de ejecución de todas las Lambdas.
@@ -22,7 +22,7 @@ Todo corre sobre servicios administrados de AWS. Estos son los que usamos y para
 - Amazon GuardDuty: detección de amenazas a nivel cuenta (actividad anómala en la API, en el DNS y en la red de las Lambdas).
 
 Fuera de AWS, el frontend usa Google Maps para la ubicación de cada solicitud y para elegir las
-zonas de un profesional, y los mails salen por SMTP a un proveedor externo (Mailtrap en la demo).
+zonas de un profesional. Los mails los manda SNS: cada usuario tiene un topic al que se publica.
 
 ## Cómo se comunican
 
@@ -84,25 +84,22 @@ publican en un topic de SNS (barriofix-alarmas), que las manda por mail si se co
 
 ## Notificaciones por mail
 
-notif-cliente decide a quién avisar. Al cliente cuando un profesional acepta, empieza, resuelve o
-libera su solicitud, y al profesional asignado cuando el cliente cancela. Busca el email en el
-perfil y arma el mail.
+Los mails los manda SNS, sin SES (el lab lo bloquea) ni un proveedor externo. Como un publish a un
+topic le llega a todos sus suscriptores, cada usuario tiene su propio topic, con un nombre derivado
+de su sub (barriofix-user-<sub>). Al registrarse, se crea su topic y se suscribe su email, y SNS le
+manda un mail de confirmación que confirma con un click; a partir de ahí recibe las notificaciones.
 
-Como lee DynamoDB, está dentro de la VPC, y SQS tampoco tiene Gateway Endpoint. Entonces no
-encola el mail sino que lo devuelve, y el destino on-success de la invocación lo deja en la cola
-de mails. Esa entrega la hace el servicio Lambda, no la función, así que no necesita salir de la
-VPC.
+notif-cliente decide a quién avisar (al cliente cuando aceptan, empiezan, resuelven o liberan su
+solicitud, y al profesional asignado cuando cancelan) y el matcher avisa a los profesionales que
+matchean. Ninguna manda el mail: devuelven el aviso con el sub del destinatario, y el destino
+on-success de la invocación lo deja en una cola. De ahí lo toma publicar-notificacion, la única que
+manda mails: publica al topic del usuario y SNS entrega el mail. Va fuera de la VPC, porque SNS no
+tiene Gateway Endpoint, y no toca datos.
 
-De la cola los toma enviar-email, la única función que manda mails. Va fuera de la VPC porque
-habla con el proveedor SMTP por internet, y no toca ningún dato. Todo lo que necesita viene en el
-mensaje. La cantidad de envíos en paralelo la limita el event source mapping, y lo que no llega a
-salir espera en la cola. La credencial SMTP está en Secrets Manager y la carga el pipeline, así
-que no pasa por el código ni por el state de Terraform. Sin credencial, la función simula los
-envíos y los deja en el log.
-
-No usamos SES. En el lab, el LabRole tiene denegado explícitamente mandar mails con SES, y no se
-pueden crear usuarios IAM, que es de donde salen sus credenciales SMTP. En una cuenta normal,
-pasar a SES sería cambiar solo enviar-email.
+Crear el topic y la suscripción de cada usuario nuevo lo hace suscribir-usuario, también fuera de
+la VPC, disparada por el Stream cuando se crea un perfil. Los usuarios de demo ya tienen su topic y
+suscripción creados por Terraform. Los topics de los usuarios reales se crean en runtime, así que
+el workflow de destroy los borra para no dejar nada huérfano.
 
 ## Matcher y zonas
 
@@ -170,7 +167,8 @@ permiten la tabla y los buckets del proyecto (en el de analytics, solo escribir 
 alguna función quedara comprometida, no tendría a dónde sacar los datos.
 
 Solo dos funciones corren fuera de la VPC, porque necesitan internet y ninguna toca datos.
-auth-callback, que llega a Cognito, y enviar-email, que llega al proveedor SMTP.
+auth-callback (llega a Cognito), y las de notificaciones (notif-cliente, publicar-notificacion y
+suscribir-usuario), que publican en SNS.
 
 En el TP2 teníamos RDS y un nivel de subredes solo para la base. DynamoDB es un servicio
 regional que no vive dentro de la VPC, así que ese nivel ya no hace falta y quedó un solo nivel

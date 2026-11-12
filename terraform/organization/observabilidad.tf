@@ -21,11 +21,12 @@ resource "aws_sns_topic_subscription" "alarmas_email" {
 locals {
   # DLQ -> nombre de la cola. Agregar un consumidor con DLQ es sumar una entrada
   dlqs = {
-    eventos       = aws_sqs_queue.eventos_dlq.name
-    analytics     = aws_sqs_queue.analytics_dlq.name
-    notif-cliente = aws_sqs_queue.notif_dlq.name
-    matcher       = aws_sqs_queue.matcher_dlq.name
-    email         = aws_sqs_queue.email_dlq.name
+    eventos           = aws_sqs_queue.eventos_dlq.name
+    analytics         = aws_sqs_queue.analytics_dlq.name
+    notif-cliente     = aws_sqs_queue.notif_dlq.name
+    matcher           = aws_sqs_queue.matcher_dlq.name
+    notificaciones    = aws_sqs_queue.notificaciones_dlq.name
+    suscribir-usuario = aws_sqs_queue.suscribir_dlq.name
   }
 }
 
@@ -56,8 +57,8 @@ locals {
   # Cola -> nombre. Con el batching (analytics) o el tope de concurrencia (email)
   # normales, ningun mensaje espera mas de un par de minutos
   colas_con_consumidor = {
-    analytics = aws_sqs_queue.analytics.name
-    email     = aws_sqs_queue.email.name
+    analytics      = aws_sqs_queue.analytics.name
+    notificaciones = aws_sqs_queue.notificaciones.name
   }
 }
 

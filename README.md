@@ -44,9 +44,10 @@ Actions.
 
    ![Secrets del repo](docs/img/secrets.png)
 
-   Opcional, para que los mails salgan de verdad: SMTP_HOST, SMTP_USER, SMTP_PASSWORD y SMTP_FROM
-   (y SMTP_PORT si no es 587), por ejemplo con el sandbox de Mailtrap. Sin esos secrets la app
-   funciona igual y los envíos quedan en el log.
+   Los mails los manda SNS, no hace falta configurar nada. Cada usuario se suscribe a su topic al
+   registrarse y recibe un mail de confirmación de SNS que tiene que confirmar con un click; recién
+   ahí le llegan las notificaciones. Los usuarios de demo usan todos el mismo mail (el del seed), así
+   que vas a recibir un mail de confirmación por cada uno.
 
 2. Abrir un pull request. Ahí corren los checks que no necesitan credenciales (formato,
    terraform validate, tfsec, tests de Python y build del front).

@@ -116,14 +116,14 @@ variable "auth_callback_reserved_concurrency" {
   default     = 10
 }
 
-variable "email_max_concurrency" {
-  description = "Invocaciones de enviar-email en paralelo (tope contra el rate limit del proveedor SMTP)"
+variable "notif_max_concurrency" {
+  description = "Invocaciones de publicar-notificacion en paralelo (tope de publicaciones a SNS)"
   type        = number
-  default     = 2
+  default     = 5
 
   validation {
-    condition     = var.email_max_concurrency >= 2 && var.email_max_concurrency <= 1000
-    error_message = "email_max_concurrency tiene que estar entre 2 y 1000 (limites de SQS para Lambda)."
+    condition     = var.notif_max_concurrency >= 2 && var.notif_max_concurrency <= 1000
+    error_message = "notif_max_concurrency tiene que estar entre 2 y 1000 (limites de SQS para Lambda)."
   }
 }
 

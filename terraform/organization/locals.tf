@@ -213,7 +213,7 @@ locals {
   demo_users = {
     # Clientes
     "juan.perez" = {
-      email       = "juan.perez@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Juan"
       apellido    = "Pérez"
       telefono    = "+54 11 5555-1001"
@@ -223,7 +223,7 @@ locals {
       descripcion = ""
     }
     "sofia.garcia" = {
-      email       = "sofia.garcia@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Sofía"
       apellido    = "García"
       telefono    = "+54 11 5555-1002"
@@ -233,7 +233,7 @@ locals {
       descripcion = ""
     }
     "martin.lopez" = {
-      email       = "martin.lopez@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Martín"
       apellido    = "López"
       telefono    = "+54 11 5555-1003"
@@ -243,7 +243,7 @@ locals {
       descripcion = ""
     }
     "valentina.romero" = {
-      email       = "valentina.romero@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Valentina"
       apellido    = "Romero"
       telefono    = "+54 11 5555-1004"
@@ -253,7 +253,7 @@ locals {
       descripcion = ""
     }
     "lucas.fernandez" = {
-      email       = "lucas.fernandez@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Lucas"
       apellido    = "Fernández"
       telefono    = "+54 11 5555-1005"
@@ -265,7 +265,7 @@ locals {
 
     # Profesionales
     "carlos.electricista" = {
-      email       = "carlos.gomez@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Carlos"
       apellido    = "Gómez"
       telefono    = "+54 11 5555-2001"
@@ -275,7 +275,7 @@ locals {
       descripcion = "Electricista matriculado. Instalaciones eléctricas, reparación de cortocircuitos, tableros, térmicas, disyuntores y luminarias."
     }
     "diego.plomero" = {
-      email       = "diego.martinez@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Diego"
       apellido    = "Martínez"
       telefono    = "+54 11 5555-2002"
@@ -285,7 +285,7 @@ locals {
       descripcion = "Plomero con experiencia en pérdidas de agua, grifería, cañerías, destapaciones y reparación de sanitarios."
     }
     "mariano.gasista" = {
-      email       = "mariano.rodriguez@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Mariano"
       apellido    = "Rodríguez"
       telefono    = "+54 11 5555-2003"
@@ -295,7 +295,7 @@ locals {
       descripcion = "Gasista especializado en instalación, mantenimiento y reparación de calefones, termotanques y cocinas."
     }
     "pablo.pintor" = {
-      email       = "pablo.sanchez@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Pablo"
       apellido    = "Sánchez"
       telefono    = "+54 11 5555-2004"
@@ -305,7 +305,7 @@ locals {
       descripcion = "Pintor de interiores y exteriores. Preparación de paredes, pintura, enduido, impermeabilización y terminaciones."
     }
     "federico.tecnico" = {
-      email       = "federico.torres@example.com"
+      email       = "spainpenguincubes@gmail.com"
       nombre      = "Federico"
       apellido    = "Torres"
       telefono    = "+54 11 5555-2005"

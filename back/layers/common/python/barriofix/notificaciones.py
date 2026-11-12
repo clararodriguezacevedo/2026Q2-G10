@@ -6,9 +6,26 @@ Devuelve el destinatario (el sub de Cognito) y el texto; buscar su email es
 trabajo de la Lambda notif-cliente.
 """
 
+import unicodedata
 from typing import Optional
 
 from barriofix import eventos
+
+
+def topic_name(sub: str) -> str:
+    """Nombre del topic SNS personal de un usuario, derivado de su sub.
+
+    Deterministico: cualquier Lambda sabe a que topic publicarle sin guardar el
+    ARN. SNS acepta alfanumerico, guiones y guiones bajos; el sub es un UUID."""
+    return f"barriofix-user-{sub}"
+
+
+def asunto_sns(texto: str) -> str:
+    """El Subject de SNS tiene que ser ASCII, sin saltos de linea y < 100 chars.
+    Nuestros asuntos tienen tildes (tomo, empezo), asi que las sacamos. El cuerpo
+    del mail sigue yendo en UTF-8."""
+    ascii_ = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode()
+    return ascii_.replace("\n", " ").strip()[:99]
 
 
 def armar(registro: dict) -> Optional[dict]:

@@ -12,8 +12,8 @@ pasan por él. Arma el zip de cada función con su propio hash, así un cambio e
 redeploya las demás. Crea el log group desde Terraform para que el destroy no deje grupos
 sueltos, y si se le pasan, agrega la VPC, los layers, las variables de entorno y la concurrencia
 reservada. Las seis Lambdas de la API salen de una sola instancia del módulo con for_each, y las
-demás (pre-signup, auth-callback, foto-subida, analytics, notif-cliente, matcher y enviar-email)
-lo usan una vez cada una.
+demás (pre-signup, auth-callback, foto-subida, analytics, notif-cliente, matcher,
+publicar-notificacion y suscribir-usuario) lo usan una vez cada una.
 
 También usamos el módulo externo [terraform-aws-modules/vpc](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws),
 que crea la VPC, las subredes privadas y las route tables. Encima de eso, en network.tf,
@@ -24,7 +24,7 @@ agregamos los Gateway Endpoints de S3 y DynamoDB y el security group de las Lamb
 Todo lo que puede cambiar entre cuentas o entornos es una variable con un default que funciona.
 Entre otras, la región, el prefijo de nombres, el CIDR de la VPC y las AZs, la memoria y el
 timeout de las Lambdas, el throttling de la API, la contraseña de los usuarios de demo (marcada
-como sensitive), la key de Google Maps, cuántos mails se mandan en paralelo (email_max_concurrency), un
+como sensitive), la key de Google Maps, cuántas notificaciones se publican en paralelo (notif_max_concurrency), un
 mail opcional para las alarmas (alarm_email) y qué servicios de seguridad se activan
 (servicios_seguridad). Las que pueden romper algo tienen validation, por
 ejemplo el prefijo tiene que servir como nombre de bucket, el CIDR tiene que ser válido y Security

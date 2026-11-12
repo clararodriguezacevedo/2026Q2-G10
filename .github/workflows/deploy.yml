@@ -109,31 +109,6 @@ jobs:
         # parallelism=1: crear las Lambdas de VPC de a una evita el timeout de ENIs del lab
         run: terraform apply -input=false -parallelism=1 tfplan
 
-      # La credencial SMTP no pasa por Terraform (ni por el state): va de los
-      # secrets del repo directo a Secrets Manager. Sin SMTP_PASSWORD no se toca
-      # y enviar-email sigue simulando los envios
-      - name: Cargar credencial SMTP (opcional)
-        working-directory: terraform/organization
-        env:
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          SMTP_FROM: ${{ secrets.SMTP_FROM }}
-        run: |
-          if [ -z "${SMTP_PASSWORD}" ]; then
-            echo "Sin SMTP_PASSWORD: los mails quedan en modo simulacion."
-            exit 0
-          fi
-          jq -n --arg host "$SMTP_HOST" --arg port "${SMTP_PORT:-587}" --arg usuario "$SMTP_USER" \
-                --arg password "$SMTP_PASSWORD" --arg remitente "$SMTP_FROM" \
-                '{host: $host, port: ($port | tonumber), usuario: $usuario, password: $password, remitente: $remitente}' \
-            > smtp.json
-          aws secretsmanager put-secret-value --secret-id "$(terraform output -raw smtp_secret_arn)" \
-            --secret-string file://smtp.json > /dev/null
-          rm -f smtp.json
-          echo "Credencial SMTP cargada."
-
       - name: Resumen
         working-directory: terraform/organization
         run: |

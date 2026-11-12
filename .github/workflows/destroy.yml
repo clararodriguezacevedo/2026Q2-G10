@@ -69,6 +69,17 @@ jobs:
           terraform destroy -auto-approve -input=false -parallelism=1 \
             -var "front_dist_path="
 
+      - name: Borrar los topics SNS de usuario huerfanos
+        # Los topics barriofix-user-* de usuarios reales los crea suscribir-usuario
+        # en runtime, no Terraform, asi que el destroy no los toca. Los de demo ya
+        # los borro Terraform; esto barre lo que quede (al borrar el topic se van
+        # sus suscripciones). Asi no queda nada huerfano en la cuenta.
+        run: |
+          aws sns list-topics --query "Topics[?contains(TopicArn, ':${ACCOUNT_ID}:barriofix-user-')].TopicArn" --output text \
+            | tr '\t' '\n' | while read -r arn; do
+                [ -n "$arn" ] && aws sns delete-topic --topic-arn "$arn" && echo "borrado $arn"
+              done
+
       - name: Borrar el bucket de state (opcional)
         if: ${{ github.event.inputs.borrar_state == 'true' }}
         run: |

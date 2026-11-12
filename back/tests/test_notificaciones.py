@@ -67,3 +67,16 @@ class Armar(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class HelpersSNS(unittest.TestCase):
+    def test_topic_name_deterministico(self):
+        from barriofix.notificaciones import topic_name
+        self.assertEqual(topic_name("94f87418-f061-7011"), "barriofix-user-94f87418-f061-7011")
+
+    def test_asunto_sns_saca_tildes_saltos_y_trunca(self):
+        from barriofix.notificaciones import asunto_sns
+        self.assertEqual(asunto_sns("Diego Martínez tomó tu solicitud"),
+                         "Diego Martinez tomo tu solicitud")
+        self.assertNotIn("\n", asunto_sns("una\ndos"))
+        self.assertLessEqual(len(asunto_sns("x" * 200)), 99)

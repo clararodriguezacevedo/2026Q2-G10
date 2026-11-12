@@ -1,19 +1,19 @@
-"""Decide a quien avisar por mail ante un cambio de estado, y le arma el mensaje.
+"""Decide a quien avisar ante un cambio de estado y arma el mensaje.
 
-La invoca el topic de eventos (SNS -> Lambda, asincronica). Va dentro de la VPC
-porque lee el email del perfil en DynamoDB. No manda el mail ni lo encola: lo
-DEVUELVE, y el destino on-success de la invocacion (configurado en Terraform)
-deja ese resultado en la cola email. Asi no necesita salir de la VPC, ya que
-SQS no tiene Gateway Endpoint; la entrega al destino la hace el servicio Lambda.
+La invoca el topic de eventos (SNS -> Lambda, asincronica). Ya no lee DynamoDB:
+el destinatario es el sub que viene en el evento, y su topic SNS personal se
+deriva del sub, asi que no necesita el email ni estar en la VPC. DEVUELVE el
+aviso, y el destino on-success de la invocacion lo deja en la cola de
+notificaciones; de ahi publicar-notificacion publica al topic del usuario.
 
-Si falla despues de los reintentos, el destino on-failure lo deja en su DLQ.
+Si falla tras los reintentos, el destino on-failure lo deja en su DLQ.
 """
 
 import json
 
 from aws_lambda_powertools import Logger
 
-from barriofix import dynamo, notificaciones
+from barriofix import notificaciones
 
 logger = Logger(service="notif-cliente")
 
@@ -26,14 +26,8 @@ def handler(event, context):
     if aviso is None:
         return None  # el cambio no se avisa (una foto, una calificacion...)
 
-    perfil = dynamo.get_item(f"USER#{aviso['destinatario']}", "PERFIL")
-    if not perfil or not perfil.get("email"):
-        logger.warning("destinatario sin perfil o sin email", extra={"sub": aviso["destinatario"]})
-        return None
-
-    nombre = perfil.get("nombre", "")
     return {
-        "para": perfil["email"],
+        "sub": aviso["destinatario"],
         "asunto": aviso["asunto"],
-        "texto": f"Hola {nombre},\n\n{aviso['cuerpo']}\n\nEl equipo de BarrioFix",
+        "texto": f"{aviso['cuerpo']}\n\nEl equipo de BarrioFix",
     }

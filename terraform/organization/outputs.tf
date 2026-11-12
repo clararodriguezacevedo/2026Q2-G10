@@ -63,11 +63,6 @@ output "athena_workgroup" {
   value       = aws_athena_workgroup.analytics.name
 }
 
-output "smtp_secret_arn" {
-  description = "Secreto con la credencial SMTP; el valor real lo carga el pipeline, no Terraform"
-  value       = aws_secretsmanager_secret.smtp.arn
-}
-
 output "vpc_id" {
   description = "ID de la VPC que crea el modulo externo"
   value       = module.vpc.vpc_id

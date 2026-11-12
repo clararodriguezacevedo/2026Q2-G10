@@ -6,8 +6,8 @@ Busca los profesionales disponibles de esa categoria que cubren esa zona con una
 Query al GSI profesionales_por_categoria (sin Scan) y arma un mail para cada uno.
 
 Igual que notif-cliente: esta en la VPC y no encola, DEVUELVE la lista de mails y
-el destino on-success de la invocacion la deja en la cola email. Asi el envio
-lento y con rate limit queda en enviar-email, el unico que habla SMTP.
+el destino on-success de la invocacion la deja en la cola de notificaciones. Asi
+publicar el aviso en SNS queda en publicar-notificacion, la unica fuera de la VPC.
 """
 
 import json
@@ -30,7 +30,7 @@ def handler(event, context):
         return None  # un cambio sobre una pendiente que no la vuelve a ofrecer (una foto)
 
     candidatos = [p for p in dynamo.profesionales_para(op["id_categoria"], op["id_zona"])
-                  if p["id_usuario"] != op["excluir"] and p.get("email")]
+                  if p["id_usuario"] != op["excluir"]]
     logger.info("profesionales que matchean", extra={
         "id_solicitud": op["id_solicitud"], "candidatos": len(candidatos)})
     if not candidatos:
@@ -43,7 +43,7 @@ def handler(event, context):
         urgencia=_nombre("URGENCIA", op["id_urgencia"]),
     )
     return [
-        {"para": p["email"], "asunto": aviso["asunto"],
+        {"sub": p["id_usuario"], "asunto": aviso["asunto"],
          "texto": f"Hola {p['nombre']},\n\n{aviso['cuerpo']}\n\nEl equipo de BarrioFix"}
         for p in candidatos[:MAX_AVISOS]
     ]
