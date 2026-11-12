@@ -96,10 +96,10 @@ on-success de la invocación lo deja en una cola. De ahí lo toma publicar-notif
 manda mails: publica al topic del usuario y SNS entrega el mail. Va fuera de la VPC, porque SNS no
 tiene Gateway Endpoint, y no toca datos.
 
-Crear el topic y la suscripción de cada usuario nuevo lo hace suscribir-usuario, también fuera de
-la VPC, disparada por el Stream cuando se crea un perfil. Los usuarios de demo ya tienen su topic y
-suscripción creados por Terraform. Los topics de los usuarios reales se crean en runtime, así que
-el workflow de destroy los borra para no dejar nada huérfano.
+Crear el topic y la suscripción de cada usuario lo hace suscribir-usuario, también fuera de la
+VPC, disparada por el Stream cuando se crea un perfil (incluidos los de demo del seed, que lee desde
+el principio del stream). Como esos topics se crean en runtime y no por Terraform, el workflow de
+destroy los borra para no dejar nada huérfano.
 
 ## Matcher y zonas
 

@@ -223,13 +223,15 @@ module "suscribir_usuario" {
 }
 
 resource "aws_lambda_event_source_mapping" "suscribir_usuario" {
-  function_name     = module.suscribir_usuario.arn
-  event_source_arn  = aws_dynamodb_table.this.stream_arn
-  starting_position = "LATEST"
+  function_name    = module.suscribir_usuario.arn
+  event_source_arn = aws_dynamodb_table.this.stream_arn
+  # TRIM_HORIZON para que, en un deploy limpio, procese tambien los PERFIL del
+  # seed (los usuarios de demo). Es idempotente: create_topic y subscribe no
+  # duplican. Si fuera LATEST podria perderse el seed segun el orden del apply
+  starting_position = "TRIM_HORIZON"
   batch_size        = 10
 
-  # Solo los INSERT de un item PERFIL (un registro nuevo). Los de demo ya tienen
-  # su topic por Terraform (abajo)
+  # Solo los INSERT de un item PERFIL (un registro, de demo o real)
   filter_criteria {
     filter {
       pattern = jsonencode({ eventName = ["INSERT"], dynamodb = { Keys = { SK = { S = ["PERFIL"] } } } })
@@ -253,22 +255,7 @@ resource "aws_sqs_queue" "suscribir_dlq" {
   tags                      = local.tags
 }
 
-# Topic y suscripcion de cada usuario de demo
-#
-# Los reales los crea suscribir-usuario en runtime; los de demo los conocemos en
-# el apply, asi que los maneja Terraform (y el destroy los borra). La suscripcion
-# queda PendingConfirmation hasta que se hace click en el mail de SNS.
-resource "aws_sns_topic" "usuario_demo" {
-  for_each = aws_cognito_user.demo
-
-  name = "${var.project}-user-${each.value.sub}"
-  tags = local.tags
-}
-
-resource "aws_sns_topic_subscription" "usuario_demo" {
-  for_each = aws_cognito_user.demo
-
-  topic_arn = aws_sns_topic.usuario_demo[each.key].arn
-  protocol  = "email"
-  endpoint  = local.demo_users[each.key].email
-}
+# Los topics de usuario (de demo y reales) los crea suscribir-usuario en runtime,
+# no Terraform: si Terraform tambien los creara, chocarian con los que ya hizo la
+# Lambda al procesar el seed ("Topic already exists"). El workflow de destroy
+# borra todos los barriofix-user-* para que no quede nada huerfano.
