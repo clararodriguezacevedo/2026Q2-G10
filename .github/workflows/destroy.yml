@@ -62,6 +62,15 @@ jobs:
             bash .github/scripts/vaciar-bucket.sh "$b"
           done
 
+      - name: Desactivar deletion protection de la tabla
+        # La tabla tiene deletion_protection_enabled = true, asi que AWS rechaza
+        # el DeleteTable. Se desactiva aca para que el destroy pueda borrarla.
+        # Si la tabla no existe (nunca se deployeo), no es un error
+        run: |
+          aws dynamodb update-table --table-name barriofix --no-deletion-protection-enabled >/dev/null 2>&1 \
+            && echo "deletion protection desactivada" \
+            || echo "la tabla no existe o ya estaba sin proteccion"
+
       - name: Terraform destroy
         working-directory: terraform/organization
         run: |

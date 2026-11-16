@@ -213,9 +213,12 @@ usa LabRole, y una policy de llave mal puesta puede dejarnos sin acceso a los da
 de SNS no tienen cifrado porque SNS solo cifra con KMS, y la llave que administra AWS no deja
 publicar a EventBridge ni a CloudWatch. Los mensajes viajan por TLS y no llevan secretos.
 
-Tampoco activamos point in time recovery en DynamoDB ni los access logs de API Gateway. Para
-esta entrega no justifican el costo, y con los logs de las Lambdas alcanza. Las Lambdas sí
-tienen el tracing de X-Ray activado.
+En DynamoDB activamos point in time recovery (backups continuos, se puede restaurar a cualquier
+segundo de los últimos 35 días) y deletion protection, para que un borrado accidental no se lleve
+los datos. El workflow de destroy desactiva la deletion protection con la CLI antes del terraform
+destroy, si no AWS rechaza el DeleteTable. No activamos los access logs de API Gateway: para esta
+entrega no justifican el costo, y con los logs de las Lambdas alcanza. Las Lambdas sí tienen el
+tracing de X-Ray activado.
 
 Los detalles de Terraform (módulos, funciones y meta-argumentos) están en
 [terraform.md](terraform.md).

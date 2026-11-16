@@ -4,9 +4,8 @@
 #   pendientes                  -> trabajos disponibles por categoria (sparse)
 #   profesionales_por_categoria -> profesionales de una categoria, para el matcher (sparse)
 
-# Sin CMK propia ni point in time recovery, decisiones asumidas (ver docs/arquitectura.md)
+# Sin CMK propia, decision asumida (ver docs/arquitectura.md)
 #tfsec:ignore:aws-dynamodb-table-customer-key
-#tfsec:ignore:aws-dynamodb-enable-recovery
 resource "aws_dynamodb_table" "this" {
   name         = var.project
   billing_mode = "PAY_PER_REQUEST"
@@ -104,13 +103,20 @@ resource "aws_dynamodb_table" "this" {
     enabled = true
   }
 
+  # Backups continuos: se puede restaurar a cualquier segundo de los ultimos 35 dias
+  point_in_time_recovery {
+    enabled = true
+  }
+
   # Fuente del backbone de eventos (ver eventos.tf). Con la imagen vieja y la
   # nueva se sabe que transicion hubo y quien estaba asignado antes de liberar
   stream_enabled   = true
   stream_view_type = "NEW_AND_OLD_IMAGES"
 
-  # Desactivada a proposito para que terraform destroy pueda borrar la tabla
-  deletion_protection_enabled = false
+  # Protege la tabla de un borrado accidental. El workflow de destroy la
+  # desactiva con la CLI antes del terraform destroy (si no, AWS rechaza el
+  # DeleteTable y el destroy de la catedra falla)
+  deletion_protection_enabled = true
 
   tags = local.tags
 }
